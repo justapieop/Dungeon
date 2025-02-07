@@ -21,9 +21,6 @@ add_executable(${PROJECT_NAME}
         src/Game.hpp
         src/Utils.cpp
         src/Utils.hpp
-        src/InputHandler.cpp
-        src/InputHandler.hpp
-        src/Vector.hpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
