@@ -19,7 +19,7 @@ Game::~Game() {
     this->renderer = nullptr;
 }
 
-void Game::init(const char *title, int w, int h) {
+void Game::init(const char *title, const int w, const int h) {
     SDL_Log("Initializing game engine");
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         SDL_Log("Game engine initialized");
@@ -77,6 +77,9 @@ void Game::handle_events() {
         case SDL_QUIT:
             SDL_Log("Game quitted");
             this->is_running = false;
+            break;
+        case SDL_KEYDOWN: case SDL_MOUSEBUTTONDOWN:
+            SDL_Log("%d", event.key.keysym.scancode);
             break;
         default:
             break;
