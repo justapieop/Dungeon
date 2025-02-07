@@ -7,6 +7,6 @@
 #include <cstring>
 
 void Utils::log_err_and_exit(const char *msg) {
-    SDL_Log(msg);
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, msg);
     SDL_Quit();
 }
