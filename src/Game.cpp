@@ -5,6 +5,8 @@
 #include "Game.hpp"
 #include <SDL2/SDL.h>
 
+#include "Utils.hpp"
+
 Game::Game() {
     this->is_running = false;
     this->window = nullptr;
@@ -26,14 +28,14 @@ void Game::init(const char *title, int w, int h) {
         if (this->window != nullptr) {
             SDL_Log("Window created");
         } else {
-            SDL_Log("Failed to create window");
+            Utils::log_err_and_exit("Failed to create window");
             return;
         }
 
         SDL_Log("Creating renderer");
         SDL_Log("Finding GPU for the renderer to work");
         if (SDL_GetNumRenderDrivers() < 0) {
-            SDL_Log("No GPU present");
+            Utils::log_err_and_exit("No GPU present");
             return;
         }
 
@@ -55,7 +57,7 @@ void Game::init(const char *title, int w, int h) {
         if (this->renderer != nullptr) {
             SDL_Log("Renderer created");
         } else {
-            SDL_Log("Failed to create a renderer");
+            Utils::log_err_and_exit("Failed to create a renderer");
             this->window = nullptr;
             return;
         }
@@ -63,7 +65,7 @@ void Game::init(const char *title, int w, int h) {
         this->is_running = true;
         SDL_ShowWindow(this->window);
     } else {
-        SDL_Log("Game engine initialization failed");
+        Utils::log_err_and_exit("Game engine initialization failed");
     }
 }
 
