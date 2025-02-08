@@ -2,8 +2,8 @@
 // Created by JustAPie on 2/7/2025.
 //
 #include "Game.hpp"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_main.h>
+#include "SDL.h"
+#include "SDL_main.h"
 
 Game* game;
 constexpr int FPS = 60, min_frame_time = 1000 / FPS;

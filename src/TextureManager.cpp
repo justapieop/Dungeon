@@ -3,9 +3,8 @@
 //
 
 #include "TextureManager.hpp"
-
-#include <SDL_image.h>
-#include <SDL2/SDL.h>
+#include "SDL_image.h"
+#include "SDL.h"
 
 SDL_Texture *TextureManager::load_texture(const char *path, SDL_Renderer *renderer) {
     SDL_Surface* surface = IMG_Load(path);
