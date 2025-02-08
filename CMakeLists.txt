@@ -21,6 +21,14 @@ add_executable(${PROJECT_NAME}
         src/Game.hpp
         src/Utils.cpp
         src/Utils.hpp
+        src/InputHandler.cpp
+        src/InputHandler.hpp
+        src/actions/Action.cpp
+        src/actions/Action.hpp
+        src/objects/Object.cpp
+        src/objects/Object.hpp
+        src/TextureManager.cpp
+        src/TextureManager.hpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
