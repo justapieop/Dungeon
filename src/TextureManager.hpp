@@ -5,10 +5,11 @@
 #ifndef TEXTUREMANAGER_HPP
 #define TEXTUREMANAGER_HPP
 #include "SDL.h"
-
+#include "string"
 
 class TextureManager {
-    static SDL_Texture* load_texture(const char* path, SDL_Renderer* renderer);
+public:
+    static SDL_Texture* load_texture(const std::string& path, SDL_Renderer* renderer);
 };
 
 
