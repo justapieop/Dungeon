@@ -29,6 +29,12 @@ add_executable(${PROJECT_NAME}
         src/objects/Object.hpp
         src/TextureManager.cpp
         src/TextureManager.hpp
+        src/scene/Scene.cpp
+        src/scene/Scene.hpp
+        src/scene/MenuScene.cpp
+        src/scene/MenuScene.hpp
+        src/components/Button.cpp
+        src/components/Button.hpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
@@ -39,9 +45,9 @@ if (CMAKE_BUILD_TYPE MATCHES Release)
     endif()
 endif ()
 
-add_custom_target(copy_assets
-        COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_LIST_DIR}/copy-assets.cmake
-)
-add_dependencies(${PROJECT_NAME} copy_assets)
-
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer SDL2_ttf::SDL2_ttf SDL2::SDL2main SDL2::SDL2)
+
+add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory assets "${CMAKE_BINARY_DIR}/$<CONFIGURATION>/assets"
+)
