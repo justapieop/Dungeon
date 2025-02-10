@@ -4,14 +4,17 @@
 
 #ifndef GAME_HPP
 #define GAME_HPP
-#include <SDL2/SDL.h>
+#include "Inputhandler.hpp"
+#include "SDL.h"
+#include "string"
+#include "scenes/SceneManager.hpp"
 
 class Game {
 public:
     Game();
     ~Game();
 
-    void init(const char* title, int w, int h);
+    void init(const std::string& title, int w, int h);
     void handle_events();
     void update();
     void render() const;
@@ -23,6 +26,8 @@ private:
     SDL_RendererInfo info{};
     SDL_Window* window;
     SDL_Renderer* renderer;
+    InputHandler* input_handler;
+    SceneManager* scene_manager{};
 };
 
 

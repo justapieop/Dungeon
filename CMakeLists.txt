@@ -29,12 +29,13 @@ add_executable(${PROJECT_NAME}
         src/objects/Object.hpp
         src/TextureManager.cpp
         src/TextureManager.hpp
-        src/scene/Scene.cpp
-        src/scene/Scene.hpp
-        src/scene/MenuScene.cpp
-        src/scene/MenuScene.hpp
-        src/components/Button.cpp
-        src/components/Button.hpp
+        src/scenes/Scene.cpp
+        src/scenes/Scene.hpp
+        src/scenes/SceneManager.cpp
+        src/scenes/SceneManager.hpp
+        src/scenes/MenuScene.cpp
+        src/scenes/MenuScene.hpp
+        src/scenes/SceneState.hpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)

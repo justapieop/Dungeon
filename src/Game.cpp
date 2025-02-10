@@ -3,28 +3,32 @@
 //
 
 #include "Game.hpp"
-#include <SDL2/SDL.h>
-
 #include "Utils.hpp"
+#include "InputHandler.hpp"
+#include "SDL.h"
+#include "string"
+#include "scenes/MenuScene.hpp"
 
 Game::Game() {
     this->is_running = false;
     this->window = nullptr;
     this->renderer = nullptr;
+    this->input_handler = new InputHandler();
 }
 
 Game::~Game() {
     this->is_running = NULL;
     this->window = nullptr;
     this->renderer = nullptr;
+    this->input_handler = nullptr;
 }
 
-void Game::init(const char *title, const int w, const int h) {
+void Game::init(const std::string& title, const int w, const int h) {
     SDL_Log("Initializing game engine");
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         SDL_Log("Game engine initialized");
         SDL_Log("Creating window");
-        this->window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_HIDDEN);
+        this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_HIDDEN);
         if (this->window != nullptr) {
             SDL_Log("Window created");
         } else {
@@ -62,8 +66,13 @@ void Game::init(const char *title, const int w, const int h) {
             return;
         }
 
+        this->scene_manager = new SceneManager(this->renderer);
+        this->scene_manager->set_scene(new MenuScene(this->renderer));
+
         this->is_running = true;
+        SDL_Log("Drawing windows");
         SDL_ShowWindow(this->window);
+        SDL_Log("Window drawn");
     } else {
         Utils::log_err_and_exit("Game engine initialization failed");
     }
@@ -75,10 +84,10 @@ void Game::handle_events() {
 
     switch (event.type) {
         case SDL_QUIT:
-            SDL_Log("Game quitted");
+            SDL_Log("Game quit");
             this->is_running = false;
             break;
-        case SDL_KEYDOWN: case SDL_MOUSEBUTTONDOWN:
+        case SDL_KEYDOWN: case SDL_MOUSEBUTTONDOWN: case SDL_MOUSEWHEEL:
             SDL_Log("%d", event.key.keysym.scancode);
             break;
         default:
@@ -87,11 +96,12 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-
+    
 }
 
 void Game::render() const {
     SDL_RenderClear(this->renderer);
+    this->scene_manager->render();
     SDL_RenderPresent(this->renderer);
 }
 
