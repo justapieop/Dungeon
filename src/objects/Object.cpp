@@ -36,9 +36,6 @@ void Object::set_size_dest(const int w, const int h) {
     this->dest.h = h;
 }
 
-
-
-
 void Object::update() {
 
 }

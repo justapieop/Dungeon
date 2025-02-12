@@ -2,7 +2,7 @@
 // Created by JustAPie on 2/10/2025.
 //
 
-#include "../../include/SceneManager.hpp"
+#include "SceneManager.hpp"
 
 SceneManager::SceneManager(SDL_Renderer* renderer) {
     this->renderer = renderer;

@@ -2,7 +2,7 @@
 // Created by JustAPie on 2/9/2025.
 //
 
-#include "../../include/Scene.hpp"
+#include "Scene.hpp"
 #include "string"
 
 Scene::Scene(SDL_Renderer* renderer) {

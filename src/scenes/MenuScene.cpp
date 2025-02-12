@@ -2,7 +2,7 @@
 // Created by JustAPie on 2/10/2025.
 //
 
-#include "../../include/MenuScene.hpp"
+#include "MenuScene.hpp"
 
 MenuScene::MenuScene(SDL_Renderer *renderer): Scene(renderer) {
 }
