@@ -2,8 +2,8 @@
 // Created by JustAPie on 2/8/2025.
 //
 
-#include "Object.hpp"
-#include "../TextureManager.hpp"
+#include "../../include/Object.hpp"
+#include "../../include/TextureManager.hpp"
 #include "string"
 
 Object::Object(const std::string& sheet, SDL_Renderer *renderer) {

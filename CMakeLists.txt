@@ -18,24 +18,28 @@ add_subdirectory(external/SDL_mixer EXCLUDE_FROM_ALL)
 add_executable(${PROJECT_NAME}
         src/main.cpp
         src/Game.cpp
-        src/Game.hpp
+        include/Game.hpp
         src/Utils.cpp
-        src/Utils.hpp
+        include/Utils.hpp
         src/InputHandler.cpp
-        src/InputHandler.hpp
+        include/InputHandler.hpp
         src/actions/Action.cpp
-        src/actions/Action.hpp
+        include/Action.hpp
         src/objects/Object.cpp
-        src/objects/Object.hpp
+        include/Object.hpp
         src/TextureManager.cpp
-        src/TextureManager.hpp
+        include/TextureManager.hpp
         src/scenes/Scene.cpp
-        src/scenes/Scene.hpp
+        include/Scene.hpp
         src/scenes/SceneManager.cpp
-        src/scenes/SceneManager.hpp
+        include/SceneManager.hpp
         src/scenes/MenuScene.cpp
-        src/scenes/MenuScene.hpp
-        src/scenes/SceneState.hpp
+        include/MenuScene.hpp
+        include/SceneState.hpp
+        src/objects/Button.cpp
+        include/Button.hpp
+        src/objects/ObjectManager.cpp
+        include/ObjectManager.hpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)

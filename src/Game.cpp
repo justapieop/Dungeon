@@ -2,12 +2,12 @@
 // Created by JustAPie on 2/7/2025.
 //
 
-#include "Game.hpp"
-#include "Utils.hpp"
+#include "../include/Game.hpp"
+#include "../include/Utils.hpp"
 #include "InputHandler.hpp"
 #include "SDL.h"
 #include "string"
-#include "scenes/MenuScene.hpp"
+#include "../include/MenuScene.hpp"
 
 Game::Game() {
     this->is_running = false;

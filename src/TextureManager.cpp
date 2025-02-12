@@ -2,7 +2,7 @@
 // Created by JustAPie on 2/8/2025.
 //
 
-#include "TextureManager.hpp"
+#include "../include/TextureManager.hpp"
 #include "SDL_image.h"
 #include "SDL.h"
 #include "string"

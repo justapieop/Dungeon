@@ -2,7 +2,7 @@
 // Created by JustAPie on 2/7/2025.
 //
 
-#include "Utils.hpp"
+#include "../include/Utils.hpp"
 #include <SDL2/SDL.h>
 #include <cstring>
 

@@ -1,7 +1,7 @@
 //
 // Created by JustAPie on 2/7/2025.
 //
-#include "Game.hpp"
+#include "../include/Game.hpp"
 #include "SDL.h"
 #include "SDL_main.h"
 
