@@ -5,7 +5,7 @@
 #ifndef SCENEMANAGER_HPP
 #define SCENEMANAGER_HPP
 #include "Scene.hpp"
-#include "SDL2/SDL.h"
+#include "../cmake-build-debug/external/SDL/include/SDL2/SDL.h"
 
 class SceneManager {
 public:

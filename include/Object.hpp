@@ -5,7 +5,7 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
-#include "SDL2/SDL.h"
+#include "../cmake-build-debug/external/SDL/include/SDL2/SDL.h"
 #include "string"
 
 class Object {

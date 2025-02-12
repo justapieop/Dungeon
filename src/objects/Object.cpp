@@ -3,7 +3,7 @@
 //
 
 #include "Object.hpp"
-#include "../TextureManager.hpp"
+#include "TextureManager.hpp"
 #include "string"
 
 Object::Object(const std::string& sheet, SDL_Renderer *renderer) {

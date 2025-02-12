@@ -6,7 +6,7 @@
 #define MENUSCENE_HPP
 
 #include "Scene.hpp"
-#include "SDL2/SDL.h"
+#include "../cmake-build-debug/external/SDL/include/SDL2/SDL.h"
 
 class MenuScene final : public Scene {
 public:

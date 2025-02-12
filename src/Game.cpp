@@ -7,7 +7,7 @@
 #include "InputHandler.hpp"
 #include "SDL.h"
 #include "string"
-#include "scenes/MenuScene.hpp"
+#include "../include/MenuScene.hpp"
 
 Game::Game() {
     this->is_running = false;

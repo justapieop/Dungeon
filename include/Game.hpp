@@ -5,9 +5,9 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 #include "Inputhandler.hpp"
-#include "SDL.h"
+#include "../cmake-build-debug/external/SDL/include/SDL2/SDL.h"
 #include "string"
-#include "scenes/SceneManager.hpp"
+#include "SceneManager.hpp"
 
 class Game {
 public:

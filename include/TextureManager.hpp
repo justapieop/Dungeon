@@ -4,7 +4,7 @@
 
 #ifndef TEXTUREMANAGER_HPP
 #define TEXTUREMANAGER_HPP
-#include "SDL.h"
+#include "../cmake-build-debug/external/SDL/include/SDL2/SDL.h"
 #include "string"
 
 class TextureManager {

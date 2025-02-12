@@ -5,7 +5,7 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 #include "SceneState.hpp"
-#include "../objects/Object.hpp"
+#include "Object.hpp"
 #include "string"
 
 class Scene {
