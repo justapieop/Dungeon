@@ -6,8 +6,9 @@
 #include "TextureManager.hpp"
 #include "string"
 
-Object::Object(const std::string& sheet, SDL_Renderer *renderer) {
+Object::Object(const std::string& sheet, SDL_Renderer *renderer, SDL_Event* event) {
     this->renderer = renderer;
+    this->event = event;
     this->texture = TextureManager::load_texture(sheet, this->renderer);
 }
 

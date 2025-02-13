@@ -7,7 +7,6 @@
 #include "InputHandler.hpp"
 #include "SDL.h"
 #include "string"
-#include "../include/MenuScene.hpp"
 
 Game::Game() {
     this->is_running = false;
@@ -66,9 +65,6 @@ void Game::init(const std::string& title, const int w, const int h) {
             return;
         }
 
-        this->scene_manager = new SceneManager(this->renderer);
-        this->scene_manager->set_scene(new MenuScene(this->renderer));
-
         this->is_running = true;
         SDL_Log("Drawing windows");
         SDL_ShowWindow(this->window);
@@ -79,16 +75,12 @@ void Game::init(const std::string& title, const int w, const int h) {
 }
 
 void Game::handle_events() {
-    SDL_Event event;
-    SDL_PollEvent(&event);
+    SDL_PollEvent(&this->event);
 
-    switch (event.type) {
+    switch (this->event.type) {
         case SDL_QUIT:
             SDL_Log("Game quit");
             this->is_running = false;
-            break;
-        case SDL_KEYDOWN: case SDL_MOUSEBUTTONDOWN: case SDL_MOUSEWHEEL:
-            SDL_Log("%d", event.key.keysym.scancode);
             break;
         default:
             break;
@@ -96,12 +88,11 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    
+
 }
 
 void Game::render() const {
     SDL_RenderClear(this->renderer);
-    this->scene_manager->render();
     SDL_RenderPresent(this->renderer);
 }
 
