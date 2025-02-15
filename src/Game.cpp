@@ -6,6 +6,7 @@
 #include "SDL_image.h"
 #include "Utils.hpp"
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include "string"
 
 Game::Game() {
@@ -100,6 +101,7 @@ void Game::clean() {
     SDL_DestroyWindow(this->window);
     SDL_Quit();
     IMG_Quit();
+    TTF_Quit();
     this->is_running = false;
 }
 
