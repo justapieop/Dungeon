@@ -21,12 +21,6 @@ add_executable(${PROJECT_NAME}
         include/Game.hpp
         src/Utils.cpp
         include/Utils.hpp
-        src/InputHandler.cpp
-        include/InputHandler.hpp
-        src/actions/Action.cpp
-        include/Action.hpp
-        src/objects/Object.cpp
-        include/Object.hpp
         src/TextureManager.cpp
         include/TextureManager.hpp
 )

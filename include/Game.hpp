@@ -4,11 +4,8 @@
 
 #ifndef GAME_HPP
 #define GAME_HPP
-#include "Inputhandler.hpp"
-#include "../cmake-build-debug/external/SDL/include/SDL2/SDL.h"
+#include "SDL2/SDL.h"
 #include "string"
-#include "SceneManager.hpp"
-
 class Game {
 public:
     Game();
@@ -24,10 +21,9 @@ public:
 private:
     bool is_running;
     SDL_RendererInfo info{};
+    SDL_Event event{};
     SDL_Window* window;
     SDL_Renderer* renderer;
-    InputHandler* input_handler;
-    SceneManager* scene_manager{};
 };
 
 

@@ -3,8 +3,8 @@
 //
 
 #include "Game.hpp"
+#include "SDL_image.h"
 #include "Utils.hpp"
-#include "InputHandler.hpp"
 #include "SDL.h"
 #include "string"
 
@@ -12,14 +12,12 @@ Game::Game() {
     this->is_running = false;
     this->window = nullptr;
     this->renderer = nullptr;
-    this->input_handler = new InputHandler();
 }
 
 Game::~Game() {
     this->is_running = NULL;
     this->window = nullptr;
     this->renderer = nullptr;
-    this->input_handler = nullptr;
 }
 
 void Game::init(const std::string& title, const int w, const int h) {
@@ -101,6 +99,7 @@ void Game::clean() {
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
     SDL_Quit();
+    IMG_Quit();
     this->is_running = false;
 }
 
