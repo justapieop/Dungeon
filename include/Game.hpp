@@ -18,12 +18,13 @@ public:
     void clean();
 
     [[nodiscard]] bool running() const { return this->is_running; }
+    static SDL_Renderer* renderer;
 private:
     bool is_running;
     SDL_RendererInfo info{};
     SDL_Event event{};
     SDL_Window* window;
-    SDL_Renderer* renderer;
+
 };
 
 
