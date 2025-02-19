@@ -12,7 +12,7 @@ unsigned int frame_time, frame_start;
 int main(int argc, char *argv[]) {
     game = new Game();
 
-    game->init("Dungeon", 1366, 768);
+    game->init("Dungeon", 1280, 720);
 
     while (game->running()) {
         frame_start = SDL_GetTicks();
