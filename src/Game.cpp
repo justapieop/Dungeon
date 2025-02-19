@@ -19,11 +19,7 @@ Game::Game() {
     this->window = nullptr;
 }
 
-Game::~Game() {
-    this->is_running = NULL;
-    this->window = nullptr;
-    renderer = nullptr;
-}
+Game::~Game() = default;
 
 void Game::init(const std::string& title, const int w, const int h) {
     SDL_Log("Initializing game engine");

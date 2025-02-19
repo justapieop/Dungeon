@@ -9,10 +9,7 @@ Object::Object(const std::string& sheet) {
     this->texture = TextureManager::load_texture(sheet);
 }
 
-Object::~Object() {
-    this->texture = nullptr;
-    this->x = this->y = 0;
-}
+Object::~Object() = default;
 
 void Object::set_pos(const int x, const int y) {
     this->x = x;
