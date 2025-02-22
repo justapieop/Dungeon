@@ -6,7 +6,7 @@
 #include "SDL_main.h"
 
 Game* game;
-constexpr int FPS = 60, min_frame_time = 1000 / FPS;
+constexpr int FPS = 144, min_frame_time = 1000 / FPS;
 unsigned int frame_time, frame_start;
 
 int main(int argc, char *argv[]) {
