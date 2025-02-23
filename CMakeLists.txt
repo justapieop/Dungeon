@@ -27,6 +27,15 @@ add_executable(${PROJECT_NAME}
         src/Object.cpp
         include/Map.hpp
         src/Map.cpp
+        include/Vec2D.hpp
+        src/Vec2D.cpp
+        include/IdStore.hpp
+        src/IdStore.cpp
+        include/Component.hpp
+        include/Entity.hpp
+        src/Entity.cpp
+        include/ComponentManager.hpp
+        src/ComponentManager.cpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
