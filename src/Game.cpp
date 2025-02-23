@@ -10,8 +10,6 @@
 #include "SDL_ttf.h"
 #include "string"
 
-Object* player;
-
 SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game() {
@@ -44,7 +42,7 @@ void Game::init(const std::string& title, const int w, const int h) {
         for (int i = 0; i < SDL_GetNumRenderDrivers(); i++) {
             if (SDL_GetRenderDriverInfo(i, &this->info) == 0) {
                 if (strstr(this->info.name, "opengl") || strstr(this->info.name, "vulkan")) {
-                    renderer = SDL_CreateRenderer(this->window, i, SDL_RENDERER_ACCELERATED);
+                    renderer = SDL_CreateRenderer(this->window, i, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
                     SDL_Log("Using detected dGPU as the render device");
                     break;
                 }
@@ -53,7 +51,7 @@ void Game::init(const std::string& title, const int w, const int h) {
 
         if (renderer == nullptr) {
             SDL_Log("Falling back to default GPU");
-            renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+            renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         }
 
         if (renderer != nullptr) {
@@ -69,11 +67,8 @@ void Game::init(const std::string& title, const int w, const int h) {
         SDL_ShowWindow(this->window);
         SDL_Log("Window drawn");
 
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-        player = new Object("assets/play.png");
-        player->set_pos(0, 0);
-        player->set_size(32, 32);
+        this->map = new Map();
+        this->map->load();
     } else {
         Utils::log_err_and_exit("Game engine initialization failed");
     }
@@ -93,12 +88,11 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    player->update();
 }
 
 void Game::render() const {
     SDL_RenderClear(renderer);
-    player->render();
+    map->draw();
     SDL_RenderPresent(renderer);
 }
 
@@ -113,3 +107,6 @@ void Game::clean() {
 }
 
 
+bool Game::running() const {
+    return this->is_running;
+}

@@ -23,6 +23,10 @@ add_executable(${PROJECT_NAME}
         include/Utils.hpp
         src/TextureManager.cpp
         include/TextureManager.hpp
+        include/Object.hpp
+        src/Object.cpp
+        include/Map.hpp
+        src/Map.cpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
@@ -33,11 +37,11 @@ if (CMAKE_BUILD_TYPE MATCHES Release)
     endif()
 endif ()
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_include_directories(${PROJECT_NAME} PRIVATE include SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer SDL2_ttf::SDL2_ttf SDL2::SDL2main SDL2::SDL2)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer SDL2_ttf::SDL2_ttf SDL2::SDL2main SDL2::SDL2)
 
-add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory assets "${CMAKE_BINARY_DIR}/$<CONFIGURATION>/assets"
+add_custom_target(copy_assets
+        COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=$<CONFIGURATION> -P ${CMAKE_CURRENT_LIST_DIR}/copy-assets.cmake
 )
+add_dependencies(${PROJECT_NAME} copy_assets)

@@ -4,6 +4,7 @@
 
 #ifndef GAME_HPP
 #define GAME_HPP
+#include "Map.hpp"
 #include "SDL2/SDL.h"
 #include "string"
 class Game {
@@ -17,14 +18,14 @@ public:
     void render() const;
     void clean();
 
-    [[nodiscard]] bool running() const { return this->is_running; }
+    [[nodiscard]] bool running() const;
     static SDL_Renderer* renderer;
 private:
     bool is_running;
     SDL_RendererInfo info{};
     SDL_Event event{};
     SDL_Window* window;
-
+    Map* map{};
 };
 
 
