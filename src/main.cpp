@@ -3,7 +3,7 @@
 //
 #include "Game.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_main.h"
+#include "SDL2/SDL_main.h"
 
 Game* game;
 constexpr int FPS = 144, min_frame_time = 1000 / FPS;
