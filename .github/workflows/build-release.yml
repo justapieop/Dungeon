@@ -19,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Download git submodules
+        run: git submodule update --init --recursive
+
       - name: Configure CMake
         run: cmake -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release
 
