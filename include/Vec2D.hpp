@@ -5,7 +5,8 @@
 #ifndef VEC2D_H
 #define VEC2D_H
 
-class Vec2D {
+class Vec2D
+{
 public:
     Vec2D();
     Vec2D(float x, float y);
@@ -18,6 +19,7 @@ public:
     Vec2D& scale(float f);
 
     [[nodiscard]] float dot_prod(const Vec2D& v) const;
+
 private:
     float x, y;
 };

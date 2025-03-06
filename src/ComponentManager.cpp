@@ -1,25 +1,31 @@
 //
-// Created by JustAPie on 2/23/2025.
+// Created by JustAPie on 06/03/2025.
 //
-#include "ComponentManager.hpp"
-#include "algorithm"
+#include "ECS.hpp"
 
-void ComponentManager::draw() {
-    for (const auto & entity : this->entities) entity->draw();
+void ComponentManager::draw()
+{
+    for (const auto& e : entities) e->draw();
 }
 
-void ComponentManager::update() {
-    for (const auto & entity : this->entities) entity->update();
+void ComponentManager::update()
+{
+    for (const auto& e : entities) e->update();
 }
 
-void ComponentManager::refresh() {
-    this->entities.erase(std::remove_if(this->entities.begin(), this->entities.end(), [](const Entity* e) {
-        return !e->active();
-    }), this->entities.end());
+void ComponentManager::refresh()
+{
+    std::erase_if(this->entities,
+                  [](const Entity* entity)
+                  {
+                      return !entity->active();
+                  }
+    );
 }
 
-Entity &ComponentManager::add_entity() {
+Entity& ComponentManager::add_entity()
+{
     auto* e = new Entity();
-    this->entities.emplace_back(e);
+    this->entities.push_back(e);
     return *e;
 }

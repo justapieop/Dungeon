@@ -5,13 +5,15 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
-Object::Object(const std::string& sheet) {
+Object::Object(const std::string& sheet)
+{
     this->texture = TextureManager::load_texture(sheet);
 }
 
 Object::~Object() = default;
 
-void Object::set_pos(const int x, const int y) {
+void Object::set_pos(const int x, const int y)
+{
     this->x = x;
     this->y = y;
 
@@ -19,20 +21,23 @@ void Object::set_pos(const int x, const int y) {
     this->dest.y = this->y;
 }
 
-void Object::set_size(const int w, const int h) {
+void Object::set_size(const int w, const int h)
+{
     this->src.w = w;
     this->src.h = h;
     this->dest.w = w;
     this->dest.h = h;
 }
 
-void Object::update() {
+void Object::update()
+{
     this->x++;
     this->y++;
     this->set_pos(this->x, this->y);
 }
 
 
-void Object::render() const {
+void Object::render() const
+{
     SDL_RenderCopy(Game::renderer, this->texture, &this->src, &this->dest);
 }

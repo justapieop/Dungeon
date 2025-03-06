@@ -7,7 +7,8 @@
 #include "SDL2/SDL.h"
 #include "vector"
 
-class Map {
+class Map
+{
 public:
     Map();
     ~Map();
@@ -16,6 +17,7 @@ public:
     void draw();
 
     [[nodiscard]] bool loaded() const;
+
 private:
     SDL_Rect src{}, dest{};
     std::vector<SDL_Texture*> textures;

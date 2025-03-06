@@ -1,13 +1,15 @@
 //
 // Created by JustAPie on 2/7/2025.
 //
-
 #ifndef GAME_HPP
 #define GAME_HPP
+#include "ECS.hpp"
 #include "Map.hpp"
 #include "SDL2/SDL.h"
 #include "string"
-class Game {
+
+class Game
+{
 public:
     Game();
     ~Game();
@@ -20,14 +22,15 @@ public:
 
     [[nodiscard]] bool running() const;
     static SDL_Renderer* renderer;
+
 private:
-    bool is_running;
+    bool is_running{};
     SDL_RendererInfo info{};
     SDL_Event event{};
-    SDL_Window* window;
+    SDL_Window* window{};
     Map* map{};
+    ComponentManager* component_manager{};
 };
-
 
 
 #endif //GAME_HPP

@@ -7,12 +7,12 @@
 #include "SDL2/SDL.h"
 #include "string"
 
-class TextureManager {
+class TextureManager
+{
 public:
     static SDL_Texture* load_texture(const std::string& path);
     static void draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
 };
-
 
 
 #endif //TEXTUREMANAGER_HPP

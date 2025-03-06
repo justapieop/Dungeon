@@ -3,6 +3,10 @@ Game submission for 2425II_INT2215_6 class.
 
 Author: Đỗ Trần Thái An (24021349)
 
+# References
+
+Most of the codebase is taken reference from [Let's Make Games](https://www.youtube.com/@CarlBirch). Especially the entity component system (`ECS, ComponentManager, Entity`)
+
 # Get started
 
 First you will have to install GCC and CMake for your system to start building this project. For this project, it is recommended to use MinGW on Windows.

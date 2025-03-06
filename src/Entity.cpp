@@ -1,45 +1,59 @@
 //
-// Created by JustAPie on 2/23/2025.
+// Created by JustAPie on 06/03/2025.
 //
-#include "Entity.hpp"
+#include "memory"
+#include "ECS.hpp"
+Entity::Entity() = default;
 
-bool Entity::active() const {
-    return this->is_active;
+Entity::~Entity() = default;
+
+
+void Entity::update()
+{
+    for (const auto& c : this->components) c->update();
 }
 
-void Entity::destroy() {
+void Entity::draw()
+{
+    for (const auto& c : this->components) c->draw();
+}
+
+void Entity::destroy()
+{
     this->is_active = false;
 }
 
-void Entity::update() {
-    for (const auto & component : this->components) component->update();
+
+template <typename T>
+bool Entity::has_component() const
+{
+    return this->component_bitset[get_component_id<T>];
 }
 
-
-void Entity::draw() {
-    for (const auto & component : this->components) component->draw();
-}
-
-template<typename T>
-bool Entity::has_component() const {
-    return this->component_bitset[IdStore::get_id<T>()];
-}
-
-template<typename T, typename... TArgs>
-T &Entity::add_components(TArgs &&... args) {
+template <typename T, typename... TArgs>
+T& Entity::add_components(TArgs&&... args)
+{
     T* c(new T(std::forward<TArgs>(args)...));
     c->entity = this;
-    this->components.emplace_back(c);
+    Component* p_component{c};
+    this->components.emplace_back(p_component);
+    this->component_array[get_component_id<T>()] = c;
 
-    this->unique_components[IdStore::get_id<T>()] = c;
-    this->component_bitset[IdStore::get_id<T>()] = true;
-
+    this->component_bitset[get_component_id<T>()] = true;
     c->init();
+
     return *c;
 }
 
-template<typename T>
-T &Entity::get_components() {
-    auto ptr(this->unique_components[IdStore::get_id<T>()]);
-    return *static_cast<T>(ptr);
+template <typename T>
+T& Entity::get_component() const
+{
+    auto p(this->component_array[get_component_id<T>()]);
+    return *static_cast<T*>(p);
+}
+
+
+bool Entity::active() const
+{
+    return this->is_active;
 }

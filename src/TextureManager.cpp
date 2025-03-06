@@ -8,7 +8,8 @@
 #include "SDL.h"
 #include "string"
 
-SDL_Texture *TextureManager::load_texture(const std::string& path) {
+SDL_Texture* TextureManager::load_texture(const std::string& path)
+{
     SDL_Surface* surface = IMG_Load(path.c_str());
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
 
@@ -16,7 +17,7 @@ SDL_Texture *TextureManager::load_texture(const std::string& path) {
     return texture;
 }
 
-void TextureManager::draw(SDL_Texture *texture, const SDL_Rect src, const SDL_Rect dest) {
+void TextureManager::draw(SDL_Texture* texture, const SDL_Rect src, const SDL_Rect dest)
+{
     SDL_RenderCopy(Game::renderer, texture, &src, &dest);
 }
-

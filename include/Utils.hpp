@@ -5,11 +5,11 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
-class Utils {
+class Utils
+{
 public:
-  static void log_err_and_exit(const char* msg);
+    static void log_err_and_exit(const char* msg);
 };
-
 
 
 #endif //UTILS_HPP
