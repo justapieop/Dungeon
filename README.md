@@ -27,4 +27,4 @@ Create a Release CMake profile if you want to build the game in `Release` mode u
 
 Configure the project using `cmake -DCMAKE_BUILD_TYPE=Debug -S . -B ./cmake-build-debug`
 
-Build the project using `cmake --build ./cmake-build-debug -DCMAKE_BUILD_TYPE=Debug --target Dungeon -j 14`
+Build the project using `cmake --build ./cmake-build-debug --target Dungeon -j 14`

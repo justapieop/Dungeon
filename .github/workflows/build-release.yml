@@ -23,7 +23,7 @@ jobs:
         run: cmake -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release
 
       - name: Build
-        run: cmake --build ./cmake-build-release --target Dungeon --config Release
+        run: cmake --build ./cmake-build-release --target Dungeon
 
       - name: Prepare artifacts
         run: |
