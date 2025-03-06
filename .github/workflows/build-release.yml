@@ -25,7 +25,6 @@ jobs:
       - name: Verify installations
         run: |
           gcc --version
-          nasm --version
 
       - name: Download Git submodules
         run: git submodule update --init --recursive
