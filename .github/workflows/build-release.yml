@@ -22,14 +22,16 @@ jobs:
           echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_PATH
           echo "C:\ProgramData\chocolatey\lib\nasm\tools\nasm" >> $GITHUB_PATH
 
-      - name: Verify GCC installation
-        run: gcc --version
+      - name: Verify installations
+        run: |
+          gcc --version
+          nasm --version
 
       - name: Download Git submodules
         run: git submodule update --init --recursive
 
       - name: Configure CMake
-        run: cmake -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release
+        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release
 
       - name: Build
         run: cmake --build ./cmake-build-release --target Dungeon
