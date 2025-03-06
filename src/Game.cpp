@@ -13,6 +13,8 @@ Game::Game() = default;
 
 Game::~Game() = default;
 
+SDL_Renderer* Game::renderer = nullptr;
+
 void Game::init(const std::string& title, const int w, const int h)
 {
     SDL_Log("Initializing game engine");
