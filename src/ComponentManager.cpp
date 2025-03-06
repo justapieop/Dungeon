@@ -1,6 +1,8 @@
 //
 // Created by JustAPie on 06/03/2025.
+// Reference: Let's Make Games
 //
+
 #include "ECS.hpp"
 
 void ComponentManager::draw()
