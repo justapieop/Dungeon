@@ -74,14 +74,15 @@ void Game::init(const std::string& title, const int w, const int h)
         }
 
         this->is_running = true;
-        SDL_Log("Drawing windows");
-        SDL_ShowWindow(this->window);
-        SDL_Log("Window drawn");
 
         this->map = new Map();
         this->map->load();
 
         this->component_manager = new ComponentManager();
+
+        SDL_Log("Drawing windows");
+        SDL_ShowWindow(this->window);
+        SDL_Log("Window drawn");
     }
     else
     {
