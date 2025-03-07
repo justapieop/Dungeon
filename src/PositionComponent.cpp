@@ -3,6 +3,12 @@
 //
 #include "PositionComponent.hpp"
 
+PositionComponent::PositionComponent(const int x, const int y)
+{
+    this->x = x;
+    this->y = y;
+}
+
 void PositionComponent::init()
 {
     this->x = this->y = 0;
@@ -10,7 +16,8 @@ void PositionComponent::init()
 
 void PositionComponent::update()
 {
-    this->set_pos(this->x++, this->y++);
+    this->x++;
+    this->y++;
 }
 
 

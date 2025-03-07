@@ -3,10 +3,13 @@
 //
 
 #include "Game.hpp"
+
+#include "PositionComponent.hpp"
 #include "SDL_image.h"
 #include "Utils.hpp"
 #include "SDL.h"
 #include "SDL_ttf.h"
+#include "SpriteComponent.hpp"
 #include "string"
 
 Game::Game() = default;
@@ -14,6 +17,10 @@ Game::Game() = default;
 Game::~Game() = default;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+SDL_Event Game::event;
+
+Entity *player = nullptr;
 
 void Game::init(const std::string& title, const int w, const int h)
 {
@@ -80,6 +87,11 @@ void Game::init(const std::string& title, const int w, const int h)
 
         this->component_manager = new ComponentManager();
 
+        player = &this->component_manager->add_entity();
+
+        player->add_components<PositionComponent>(70, 100);
+        player->add_components<SpriteComponent>("assets/tile_0084.png");
+
         SDL_Log("Drawing windows");
         SDL_ShowWindow(this->window);
         SDL_Log("Window drawn");
@@ -92,9 +104,9 @@ void Game::init(const std::string& title, const int w, const int h)
 
 void Game::handle_events()
 {
-    SDL_PollEvent(&this->event);
+    SDL_PollEvent(&event);
 
-    switch (this->event.type)
+    switch (event.type)
     {
     case SDL_QUIT:
         SDL_Log("Game quit");
@@ -114,6 +126,7 @@ void Game::render() const
 {
     SDL_RenderClear(renderer);
     map->draw();
+    this->component_manager->draw();
     SDL_RenderPresent(renderer);
 }
 

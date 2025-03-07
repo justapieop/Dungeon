@@ -9,6 +9,7 @@
 class PositionComponent final : public Component
 {
 public:
+    PositionComponent(int x, int y);
     void init() override;
     void update() override;
     void draw() override;

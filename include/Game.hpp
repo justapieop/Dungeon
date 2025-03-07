@@ -22,11 +22,11 @@ public:
 
     [[nodiscard]] bool running() const;
     static SDL_Renderer* renderer;
+    static SDL_Event event;
 
 private:
     bool is_running{};
     SDL_RendererInfo info{};
-    SDL_Event event{};
     SDL_Window* window{};
     Map* map{};
     ComponentManager* component_manager{};

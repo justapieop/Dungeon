@@ -23,17 +23,15 @@ add_executable(${PROJECT_NAME}
         include/Utils.hpp
         src/TextureManager.cpp
         include/TextureManager.hpp
-        include/Object.hpp
-        src/Object.cpp
         include/Map.hpp
         src/Map.cpp
         include/Vec2D.hpp
         src/Vec2D.cpp
         include/ECS.hpp
-        src/Entity.cpp
-        src/ComponentManager.cpp
         include/PositionComponent.hpp
         src/PositionComponent.cpp
+        include/SpriteComponent.hpp
+        src/SpriteComponent.cpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
