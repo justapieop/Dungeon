@@ -36,6 +36,7 @@ using ComponentArray = std::vector<Component*>;
 class Component
 {
 public:
+    virtual ~Component() = default;
     virtual void init();
     virtual void update();
     virtual void draw();
