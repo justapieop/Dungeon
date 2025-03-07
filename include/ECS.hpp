@@ -5,6 +5,7 @@
 
 #ifndef ECS_HPP
 #define ECS_HPP
+#include "memory"
 #include "iostream"
 #include "bitset"
 #include "vector"
@@ -30,60 +31,107 @@ ComponentId get_component_id() noexcept
 constexpr std::size_t max_components = 32;
 
 using ComponentBitset = std::bitset<max_components>;
-using ComponentArray = std::vector<Component*>;
+using ComponentArray = std::array<Component*, max_components>;
 
 
 class Component
 {
 public:
     virtual ~Component() = default;
-    virtual void init();
-    virtual void update();
-    virtual void draw();
-    Entity* get_entity();
-
-private:
+    virtual void init() = 0;
+    virtual void update() = 0;
+    virtual void draw() = 0;
     Entity* entity{};
 };
 
 class Entity
 {
 public:
-    Entity();
-    ~Entity();
+    Entity() = default;
+    ~Entity() = default;
 
-    void update();
-    void draw();
-    void destroy();
+    void update()
+    {
+        for (const auto& c : this->components) c->update();
+    }
+    void draw()
+    {
+        for (const auto& c : this->components) c->draw();
+    }
+    void destroy()
+    {
+        this->is_active = false;
+    }
 
     template <typename T>
-    [[nodiscard]] bool has_component() const;
+    [[nodiscard]] bool has_component() const
+    {
+        return this->component_bitset[get_component_id<T>];
+    }
 
     template <typename T, typename... TArgs>
-    T& add_components(TArgs&&... args);
+    T& add_components(TArgs&&... args)
+    {
+        T* c(new T(std::forward<TArgs>(args)...));
+        c->entity = this;
+        std::unique_ptr<Component> p_component{c};
+        this->components.emplace_back(std::move(p_component));
+        this->component_array[get_component_id<T>()] = c;
+
+        this->component_bitset[get_component_id<T>()] = true;
+        c->init();
+
+        return *c;
+    }
 
     template <typename T>
-    T& get_component() const;
+    T& get_component() const
+    {
+        auto p(this->component_array[get_component_id<T>()]);
+        return *static_cast<T*>(p);
+    }
 
 
-    [[nodiscard]] bool active() const;
+    [[nodiscard]] bool active() const
+    {
+        return this->is_active;
+    }
 
 private:
     bool is_active{};
-    std::vector<Component*> components;
+    std::vector<std::unique_ptr<Component>> components{};
 
-    ComponentArray component_array;
-    ComponentBitset component_bitset;
+    ComponentArray component_array{};
+    ComponentBitset component_bitset{};
 };
 
 class ComponentManager
 {
 public:
-    void update();
-    void draw();
-    void refresh();
+    void update()
+    {
+        for (const auto& e : entities) e->update();
+    }
+    void draw()
+    {
+        for (const auto& e : entities) e->draw();
+    }
+    void refresh()
+    {
+        std::erase_if(this->entities,
+                  [](const Entity* entity)
+                  {
+                      return !entity->active();
+                  }
+    );
+    }
 
-    Entity& add_entity();
+    Entity& add_entity()
+    {
+        auto* e = new Entity();
+        this->entities.push_back(e);
+        return *e;
+    }
 
 private:
     std::vector<Entity*> entities;
