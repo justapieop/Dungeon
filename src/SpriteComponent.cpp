@@ -2,7 +2,6 @@
 // Created by JustAPie on 07/03/2025.
 //
 #include "SpriteComponent.hpp"
-
 #include "TextureManager.hpp"
 
 SpriteComponent::SpriteComponent() = default;
@@ -18,13 +17,19 @@ void SpriteComponent::draw()
 
 void SpriteComponent::update()
 {
-    this->dest.x = this->position_component->get_x();
-    this->dest.y = this->position_component->get_y();
+    this->dest.x = static_cast<int>(this->transform->get_pos()->get_x());
+    this->dest.y = static_cast<int>(this->transform->get_pos()->get_y());
 }
+
+void SpriteComponent::set_texture(SDL_Texture* texture)
+{
+    this->texture = texture;
+}
+
 
 void SpriteComponent::init()
 {
-    this->position_component = &this->entity->get_component<PositionComponent>();
+    this->transform = &this->entity->get_component<TransformComponent>();
     this->src.x = this->src.y = 0;
     this->src.w = this->src.h = 16;
     this->dest.w = this->dest.h = 32;

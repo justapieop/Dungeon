@@ -5,9 +5,9 @@
 #ifndef SPRITECOMPONENT_HPP
 #define SPRITECOMPONENT_HPP
 
-#include "PositionComponent.hpp"
 #include "SDL2/SDL.h"
 #include "string"
+#include "TransformComponent.hpp"
 
 class SpriteComponent final : public Component
 {
@@ -18,9 +18,10 @@ public:
     void update() override;
     void draw() override;
     void init() override;
+    void set_texture(SDL_Texture *texture);
 
 private:
-    PositionComponent *position_component{};
+    TransformComponent *transform{};
     SDL_Texture *texture{};
     SDL_Rect src{}, dest{};
 };

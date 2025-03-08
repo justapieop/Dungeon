@@ -4,7 +4,6 @@
 
 #include "Game.hpp"
 
-#include "PositionComponent.hpp"
 #include "SDL_image.h"
 #include "Utils.hpp"
 #include "SDL.h"
@@ -89,7 +88,7 @@ void Game::init(const std::string& title, const int w, const int h)
 
         player = &this->component_manager->add_entity();
 
-        player->add_components<PositionComponent>(70, 100);
+        player->add_components<TransformComponent>(100, 500);
         player->add_components<SpriteComponent>("assets/tile_0084.png");
 
         SDL_Log("Drawing windows");
@@ -109,7 +108,7 @@ void Game::handle_events()
     switch (event.type)
     {
     case SDL_QUIT:
-        SDL_Log("Game quit");
+        SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
         this->is_running = false;
         break;
     default:
@@ -125,14 +124,14 @@ void Game::update()
 void Game::render() const
 {
     SDL_RenderClear(renderer);
-    map->draw();
+    this->map->draw();
     this->component_manager->draw();
     SDL_RenderPresent(renderer);
 }
 
 void Game::clean()
 {
-    SDL_Log("Destroying window and renderer");
+    SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Destroying window and renderer");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(this->window);
     SDL_Quit();

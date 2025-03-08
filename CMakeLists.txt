@@ -28,10 +28,10 @@ add_executable(${PROJECT_NAME}
         include/Vec2D.hpp
         src/Vec2D.cpp
         include/ECS.hpp
-        include/PositionComponent.hpp
-        src/PositionComponent.cpp
         include/SpriteComponent.hpp
         src/SpriteComponent.cpp
+        include/TransformComponent.hpp
+        src/TransformComponent.cpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
