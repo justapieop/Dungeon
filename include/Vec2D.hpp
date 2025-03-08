@@ -18,9 +18,9 @@ public:
     Vec2D& subtract(const Vec2D& v);
     Vec2D& multiply(float f);
     Vec2D& divide(float f);
+    Vec2D& set_pos(float x, float y);
 
     [[nodiscard]] float dot_prod(const Vec2D& v) const;
-
 private:
     float x, y;
 };

@@ -54,6 +54,12 @@ Vec2D& Vec2D::divide(const float f)
     return *this;
 }
 
+Vec2D& Vec2D::set_pos(const float x, const float y)
+{
+    this->x = x;
+    this->y = y;
+    return *this;
+}
 
 float Vec2D::dot_prod(const Vec2D& v) const
 {
