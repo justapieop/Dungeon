@@ -2,6 +2,7 @@
 // Created by JustAPie on 2/23/2025.
 //
 #include "Vec2D.hpp"
+#include "cmath"
 
 Vec2D::Vec2D()
 {
@@ -60,6 +61,18 @@ Vec2D& Vec2D::set_pos(const float x, const float y)
     this->y = y;
     return *this;
 }
+
+float Vec2D::length() const
+{
+    return sqrtf(this->x * this->x + this->y * this->y);
+}
+
+Vec2D& Vec2D::normalize()
+{
+    this->divide(this->length());
+    return *this;
+}
+
 
 float Vec2D::dot_prod(const Vec2D& v) const
 {

@@ -21,6 +21,8 @@ public:
     Vec2D& set_pos(float x, float y);
 
     [[nodiscard]] float dot_prod(const Vec2D& v) const;
+    [[nodiscard]] float length() const;
+    Vec2D& normalize();
 private:
     float x, y;
 };
