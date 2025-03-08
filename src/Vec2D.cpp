@@ -40,12 +40,20 @@ Vec2D& Vec2D::subtract(const Vec2D& v)
     return *this;
 }
 
-Vec2D& Vec2D::scale(const float f)
+Vec2D& Vec2D::multiply(const float f)
 {
-    this->x += f * x;
-    this->y += f * y;
+    this->x *= f;
+    this->y *= f;
     return *this;
 }
+
+Vec2D& Vec2D::divide(const float f)
+{
+    this->x /= f;
+    this->y /= y;
+    return *this;
+}
+
 
 float Vec2D::dot_prod(const Vec2D& v) const
 {

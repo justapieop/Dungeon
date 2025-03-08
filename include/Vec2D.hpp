@@ -16,7 +16,8 @@ public:
     [[nodiscard]] float get_y() const;
     Vec2D& add(const Vec2D& v);
     Vec2D& subtract(const Vec2D& v);
-    Vec2D& scale(float f);
+    Vec2D& multiply(float f);
+    Vec2D& divide(float f);
 
     [[nodiscard]] float dot_prod(const Vec2D& v) const;
 
