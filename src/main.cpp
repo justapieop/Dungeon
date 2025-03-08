@@ -1,6 +1,7 @@
 //
 // Created by JustAPie on 2/7/2025.
 //
+#include "Constants.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_main.h"
@@ -13,7 +14,7 @@ int main(int argc, char* argv[])
 {
     game = new Game();
 
-    game->init("Dungeon", 1280, 720);
+    game->init("Dungeon", SCREEN_WIDTH, SCREEN_HEIGHT);
 
     while (game->running())
     {

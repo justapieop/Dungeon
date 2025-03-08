@@ -32,6 +32,7 @@ add_executable(${PROJECT_NAME}
         src/SpriteComponent.cpp
         include/TransformComponent.hpp
         src/TransformComponent.cpp
+        include/Constants.hpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
