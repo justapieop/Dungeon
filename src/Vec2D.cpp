@@ -51,7 +51,7 @@ Vec2D& Vec2D::multiply(const float f)
 Vec2D& Vec2D::divide(const float f)
 {
     this->x /= f;
-    this->y /= y;
+    this->y /= f;
     return *this;
 }
 
