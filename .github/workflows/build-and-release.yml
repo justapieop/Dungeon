@@ -25,7 +25,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-external-
 
-      - name: Install MinGW
+      - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
           choco install mingw nasm -y
@@ -39,11 +39,14 @@ jobs:
       - name: Download Git submodules
         run: git submodule update --init --recursive
 
-      - name: Configure CMake
-        run: cmake -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release
+      - name: Configure CMake (Windows)
+        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "MinGW Makefiles"
+
+      - name: Configure CMake (Linux)
+        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "Unix Makefiles"
 
       - name: Build
-        run: cmake --build -G "MinGW Makefiles" ./cmake-build-release --target Dungeon
+        run: cmake --build ./cmake-build-release --target Dungeon
 
       - name: Prepare artifacts
         run: |
