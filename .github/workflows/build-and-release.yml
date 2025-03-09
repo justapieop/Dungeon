@@ -47,10 +47,10 @@ jobs:
 
       - name: Configure CMake (Windows)
         if: runner.os == 'Windows'
-        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "MinGW Makefiles"
+        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "MinGW Makefiles" -DCMAKE_CXX_STANDARD=23
 
       - name: Configure CMake (Linux)
-        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "Unix Makefiles"
+        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "Unix Makefiles" -DCMAKE_CXX_STANDARD=23
 
       - name: Build
         run: cmake --build ./cmake-build-release --target Dungeon
