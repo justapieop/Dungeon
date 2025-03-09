@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -25,17 +25,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-external-
 
-      - name: Install dependencies (Windows)
+      - name: Install dependencies
         if: runner.os == 'Windows'
         run: |
           choco install mingw nasm -y
           echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_PATH
           echo "C:\ProgramData\chocolatey\lib\nasm\tools\nasm" >> $GITHUB_PATH
-      - name: Install dependencies (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt update
-          sudo apt install -y gcc cmake
 
       - name: Verify installations
         run: |
@@ -45,13 +40,8 @@ jobs:
       - name: Download Git submodules
         run: git submodule update --init --recursive
 
-      - name: Configure CMake (Windows)
-        if: runner.os == 'Windows'
+      - name: Configure CMake
         run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_STANDARD=26 -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "MinGW Makefiles"
-
-      - name: Configure CMake (Linux)
-        if: runner.os == 'Linux'
-        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_STANDARD=26 -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "Unix Makefiles"
 
       - name: Build
         run: cmake --build ./cmake-build-release --target Dungeon
