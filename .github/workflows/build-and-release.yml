@@ -32,7 +32,8 @@ jobs:
           echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_PATH
           echo "C:\ProgramData\chocolatey\lib\nasm\tools\nasm" >> $GITHUB_PATH
 
-      - name: Verify installations
+      - name: Verify installations (Windows)
+        if: runner.os == 'Windows'
         run: |
           gcc --version
 
@@ -40,6 +41,7 @@ jobs:
         run: git submodule update --init --recursive
 
       - name: Configure CMake (Windows)
+        if: runner.os == 'Windows'
         run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release -G "MinGW Makefiles"
 
       - name: Configure CMake (Linux)
