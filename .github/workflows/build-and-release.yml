@@ -1,0 +1,60 @@
+name: Build and release
+
+on:
+  release:
+    types: [created]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install MinGW
+        run: |
+          choco install mingw nasm -y
+          echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_PATH
+          echo "C:\ProgramData\chocolatey\lib\nasm\tools\nasm" >> $GITHUB_PATH
+
+      - name: Verify installations
+        run: |
+          gcc --version
+
+      - name: Download Git submodules
+        run: git submodule update --init --recursive
+
+      - name: Configure CMake
+        run: cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -S . -B ./cmake-build-release
+
+      - name: Build
+        run: cmake --build ./cmake-build-release --target Dungeon
+
+      - name: Prepare artifacts
+        run: |
+          mkdir build
+          cp ./cmake-build-release/Release artifacts/
+        shell: bash
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dungeon-${{ runner.os }}
+          path: artifacts/*
+  release:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Upload release artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Dungeon-*/**
+          token: '${{ github.token }}'
