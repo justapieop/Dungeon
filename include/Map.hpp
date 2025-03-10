@@ -6,6 +6,7 @@
 #define MAP_HPP
 #include "SDL2/SDL.h"
 #include "vector"
+#include "string"
 
 class Map
 {
@@ -13,16 +14,16 @@ public:
     Map();
     ~Map();
 
-    void load();
+    void load(const std::string& path);
     void draw();
 
     [[nodiscard]] bool loaded() const;
-
+    static std::vector<std::vector<int>> map;
 private:
     SDL_Rect src{}, dest{};
     std::vector<SDL_Texture*> textures;
     bool is_loaded;
-    std::vector<std::vector<int>> map;
+
 };
 
 #endif //MAP_HPP

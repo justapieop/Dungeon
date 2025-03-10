@@ -3,6 +3,8 @@
 //
 #include "TransformComponent.hpp"
 
+#include "Game.hpp"
+
 TransformComponent::TransformComponent()
 {
     this->pos = new Vec2D(0.0f, 0.0f);
@@ -28,9 +30,53 @@ void TransformComponent::draw()
 {
 }
 
+float TransformComponent::get_speed() const
+{
+    return this->speed;
+}
+
+void TransformComponent::set_speed(const float speed)
+{
+    this->speed = speed;
+}
+
+
 void TransformComponent::update()
 {
-    this->get_pos()->add(Vec2D(1.0f, 1.0f));
+    const Uint8* key_state = SDL_GetKeyboardState(nullptr);
+    if (key_state[SDL_SCANCODE_W])
+    {
+        this->pos->subtract(Vec2D(0, 1).multiply(this->get_speed()));
+    }
+    else if (key_state[SDL_SCANCODE_S])
+    {
+        this->pos->add(Vec2D(0, 1).multiply(this->get_speed()));
+    }
+    else if (key_state[SDL_SCANCODE_A])
+    {
+        this->pos->subtract(Vec2D(1, 0).multiply(this->get_speed()));
+    }
+    else if (key_state[SDL_SCANCODE_D])
+    {
+        this->pos->add(Vec2D(1, 0).multiply(this->get_speed()));
+    }
+
+    if (key_state[SDL_SCANCODE_W])
+    {
+        this->pos->subtract(Vec2D(0, 1).multiply(this->get_speed()));
+    }
+    else if (key_state[SDL_SCANCODE_S])
+    {
+        this->pos->add(Vec2D(0, 1).multiply(this->get_speed()));
+    }
+    else if (key_state[SDL_SCANCODE_A])
+    {
+        this->pos->subtract(Vec2D(1, 0).multiply(this->get_speed()));
+    }
+    else if (key_state[SDL_SCANCODE_D])
+    {
+        this->pos->add(Vec2D(1, 0).multiply(this->get_speed()));
+    }
 }
 
 

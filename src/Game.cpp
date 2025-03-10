@@ -82,18 +82,21 @@ void Game::init(const std::string& title, const int w, const int h)
         this->is_running = true;
 
         this->map = new Map();
-        this->map->load();
+        this->map->load("data/map.data");
 
         this->component_manager = new ComponentManager();
 
         player = &this->component_manager->add_entity();
 
-        player->add_components<TransformComponent>(100, 500);
+        player->add_components<TransformComponent>(300, 300);
         player->add_components<SpriteComponent>("assets/tile_0084.png");
 
-        SDL_Log("Drawing windows");
-        SDL_ShowWindow(this->window);
-        SDL_Log("Window drawn");
+        if (this->map->loaded())
+        {
+            SDL_Log("Drawing windows");
+            SDL_ShowWindow(this->window);
+            SDL_Log("Window drawn");
+        }
     }
     else
     {

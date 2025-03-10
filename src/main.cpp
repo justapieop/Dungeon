@@ -7,7 +7,6 @@
 #include "SDL2/SDL_main.h"
 
 Game* game;
-constexpr int FPS = 144, min_frame_time = 1000 / FPS;
 unsigned int frame_time, frame_start;
 
 int main(int argc, char* argv[])
@@ -24,9 +23,9 @@ int main(int argc, char* argv[])
         game->render();
 
         frame_time = SDL_GetTicks() - frame_start;
-        if (frame_time < min_frame_time)
+        if (frame_time < MIN_FRAME_TIME)
         {
-            SDL_Delay(min_frame_time - frame_time);
+            SDL_Delay(MIN_FRAME_TIME - frame_time);
         }
     }
 

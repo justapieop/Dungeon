@@ -16,10 +16,13 @@ public:
     void update() override;
     void draw() override;
     [[nodiscard]] Vec2D* get_pos() const;
+    [[nodiscard]] float get_speed() const;
     void set_pos(float x, float y) const;
+    void set_speed(float speed);
 
 private:
     Vec2D *pos;
+    float speed = 3;
 };
 
 #endif //TRANSFORMCOMPONENT_HPP

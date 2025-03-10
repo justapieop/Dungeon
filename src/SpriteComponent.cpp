@@ -26,10 +26,10 @@ void SpriteComponent::set_texture(SDL_Texture* texture)
     this->texture = texture;
 }
 
-
 void SpriteComponent::init()
 {
     this->transform = &this->entity->get_component<TransformComponent>();
+    this->transform->set_speed(1.0);
     this->src.x = this->src.y = 0;
     this->src.w = this->src.h = 16;
     this->dest.w = this->dest.h = 32;

@@ -5,7 +5,9 @@
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-constexpr int SCREEN_WIDTH = 1280;
-constexpr int SCREEN_HEIGHT = 720;
+constexpr unsigned int SCREEN_WIDTH = 768;
+constexpr unsigned int SCREEN_HEIGHT = 432;
+constexpr unsigned int FPS = 144;
+constexpr unsigned int MIN_FRAME_TIME = 1000 / FPS;
 
 #endif //CONSTANTS_HPP
