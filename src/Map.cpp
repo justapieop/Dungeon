@@ -42,14 +42,12 @@ void Map::draw()
 void Map::load(const std::string& path)
 {
     this->map.resize(27);
-    SDL_Log("Loading map...");
     this->map = Utils::load_matrix(path.c_str(), 27, 48);
     this->is_loaded = true;
 }
 
 void Map::load_textures(const std::string& path)
 {
-    SDL_Log("Loading map textures");
     for (const std::filesystem::path dir(path); auto& p : std::filesystem::directory_iterator(dir))
     {
         if (p.is_regular_file())
@@ -57,7 +55,6 @@ void Map::load_textures(const std::string& path)
             this->textures.push_back(TextureManager::load_texture(p.path().string()));
         }
     }
-    SDL_Log("Loaded map textures");
 }
 
 
