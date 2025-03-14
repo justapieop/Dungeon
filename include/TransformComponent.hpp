@@ -19,10 +19,9 @@ public:
     [[nodiscard]] float get_speed() const;
     void set_pos(float x, float y) const;
     void set_speed(float speed);
-
 private:
     Vec2D *pos;
-    float speed = 3;
+    float speed = 2.0f;
 };
 
 #endif //TRANSFORMCOMPONENT_HPP
