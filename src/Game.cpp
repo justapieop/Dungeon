@@ -82,7 +82,8 @@ void Game::init(const std::string& title, const int w, const int h)
         this->is_running = true;
 
         this->map = new Map();
-        this->map->load("data/map.data");
+        this->map->load("./data/map.data");
+        this->map->load_textures("./assets/");
 
         this->component_manager = new ComponentManager();
 

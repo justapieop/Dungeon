@@ -16,6 +16,7 @@ public:
 
     void load(const std::string& path);
     void draw();
+    void load_textures(const std::string& path);
 
     [[nodiscard]] bool loaded() const;
     static std::vector<std::vector<int>> map;

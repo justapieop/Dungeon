@@ -61,9 +61,12 @@ void Map::load(const std::string& path)
     {
         Utils::log_err_and_exit("Failed to find map.data");
     }
+}
 
+void Map::load_textures(const std::string& path)
+{
     SDL_Log("Loading map textures");
-    for (const std::filesystem::path dir("./assets/"); auto& p : std::filesystem::directory_iterator(dir))
+    for (const std::filesystem::path dir(path); auto& p : std::filesystem::directory_iterator(dir))
     {
         if (p.is_regular_file())
         {
@@ -72,6 +75,7 @@ void Map::load(const std::string& path)
     }
     SDL_Log("Loaded map textures");
 }
+
 
 bool Map::loaded() const
 {
