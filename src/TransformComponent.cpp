@@ -46,41 +46,41 @@ void TransformComponent::update()
 {
     if (const Uint8* key_state = SDL_GetKeyboardState(nullptr); key_state[SDL_SCANCODE_W])
     {
-        this->pos->subtract(Vec2D(0, 1).multiply(this->get_speed()));
+        this->pos->subtract(Vec2D(0.0f, 1.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_A])
-            this->pos->subtract(Vec2D(1, 0).normalize().multiply(this->get_speed()));
+            this->pos->subtract(Vec2D(1.0f, 0.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_D])
-            this->pos->add(Vec2D(1, 0).normalize().multiply(this->get_speed()));
+            this->pos->add(Vec2D(1.0f, 0.0f).multiply(this->get_speed()));
     }
     else if (key_state[SDL_SCANCODE_S])
     {
-        this->pos->add(Vec2D(0, 1).multiply(this->get_speed()));
+        this->pos->add(Vec2D(0.0f, 1.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_A])
-            this->pos->subtract(Vec2D(1, 0).normalize().multiply(this->get_speed()));
+            this->pos->subtract(Vec2D(1.0f, 0.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_D])
-            this->pos->add(Vec2D(1, 0).normalize().multiply(this->get_speed()));
+            this->pos->add(Vec2D(1.0f, 0.0f).multiply(this->get_speed()));
     }
     else if (key_state[SDL_SCANCODE_A])
     {
-        this->pos->subtract(Vec2D(1, 0).multiply(this->get_speed()));
+        this->pos->subtract(Vec2D(1.0f, 0.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_W])
-            this->pos->subtract(Vec2D(0, 1).normalize().multiply(this->get_speed()));
+            this->pos->subtract(Vec2D(0.0f, 1.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_S])
-            this->pos->add(Vec2D(0, 1).normalize().multiply(this->get_speed()));
+            this->pos->add(Vec2D(0.0f, 1.0f).multiply(this->get_speed()));
     }
     else if (key_state[SDL_SCANCODE_D])
     {
-        this->pos->add(Vec2D(1, 0).multiply(this->get_speed()));
+        this->pos->add(Vec2D(1.0f, 0.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_W])
-            this->pos->subtract(Vec2D(0, 1).normalize().multiply(this->get_speed()));
+            this->pos->subtract(Vec2D(0.0f, 1.0f).multiply(this->get_speed()));
         if (key_state[SDL_SCANCODE_S])
-            this->pos->add(Vec2D(0, 1).normalize().multiply(this->get_speed()));
+            this->pos->add(Vec2D(0.0f, 1.0f).multiply(this->get_speed()));
     }
 
-    if (this->get_pos()->get_x() < 0) this->get_pos()->set_pos(0, this->get_pos()->get_y());
-    if (this->get_pos()->get_y() < 0) this->get_pos()->set_pos(this->get_pos()->get_x(), 0);
-    if (this->get_pos()->get_y() >= SCREEN_HEIGHT - 32) this->get_pos()->set_pos(this->get_pos()->get_x(), SCREEN_HEIGHT - 32);
-    if (this->get_pos()->get_x() >= SCREEN_WIDTH - 32) this->get_pos()->set_pos(SCREEN_WIDTH - 32, this->get_pos()->get_y());
+    if (this->get_pos()->get_x() < 0) this->get_pos()->set_pos(0.0f, this->get_pos()->get_y());
+    if (this->get_pos()->get_y() < 0) this->get_pos()->set_pos(this->get_pos()->get_x(), 0.0f);
+    if (this->get_pos()->get_y() >= SCREEN_HEIGHT - 32) this->get_pos()->set_pos(this->get_pos()->get_x(), static_cast<float>(SCREEN_HEIGHT - 32));
+    if (this->get_pos()->get_x() >= SCREEN_WIDTH - 32) this->get_pos()->set_pos(static_cast<float>(SCREEN_WIDTH - 32), this->get_pos()->get_y());
 }
 
 
