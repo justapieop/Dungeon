@@ -19,6 +19,8 @@ SDL_Renderer* Game::renderer = nullptr;
 
 SDL_Event Game::event;
 
+Map* Game::coll_map;
+
 Entity *player = nullptr;
 
 void Game::init(const std::string& title, const int w, const int h)
@@ -97,6 +99,10 @@ void Game::init(const std::string& title, const int w, const int h)
             SDL_Log("Drawing windows");
             SDL_ShowWindow(this->window);
             SDL_Log("Window drawn");
+
+            SDL_Log("Loading collision map");
+            Game::coll_map = new Map();
+            Game::coll_map->load("./data/collision.data");
         }
     }
     else
