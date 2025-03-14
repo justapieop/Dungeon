@@ -25,15 +25,13 @@ Map::~Map()
     this->textures.clear();
 }
 
-std::vector<std::vector<int>> Map::map;
-
 void Map::draw()
 {
-    for (int i = 0; i < map.size(); i++)
+    for (int i = 0; i < this->map.size(); i++)
     {
-        for (int j = 0; j < map[i].size(); j++)
+        for (int j = 0; j < this->map[i].size(); j++)
         {
-            const int type = map[i][j];
+            const int type = this->map[i][j];
             this->dest.x = j * 16;
             this->dest.y = i * 16;
             TextureManager::draw(this->textures[type], this->src, this->dest);
@@ -43,24 +41,10 @@ void Map::draw()
 
 void Map::load(const std::string& path)
 {
-    map.resize(27);
+    this->map.resize(27);
     SDL_Log("Loading map...");
-    if (std::ifstream map_data(path); map_data.is_open())
-    {
-        for (auto& i : map)
-        {
-            i.resize(48);
-            for (int& j : i)
-                map_data >> j;
-        }
-        SDL_Log("Map data successfully loaded");
-        this->is_loaded = true;
-        map_data.close();
-    }
-    else
-    {
-        Utils::log_err_and_exit("Failed to find map.data");
-    }
+    this->map = Utils::load_matrix(path.c_str(), 27, 48);
+    this->is_loaded = true;
 }
 
 void Map::load_textures(const std::string& path)

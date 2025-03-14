@@ -19,12 +19,11 @@ public:
     void load_textures(const std::string& path);
 
     [[nodiscard]] bool loaded() const;
-    static std::vector<std::vector<int>> map;
 private:
     SDL_Rect src{}, dest{};
     std::vector<SDL_Texture*> textures;
     bool is_loaded;
-
+    std::vector<std::vector<int>> map;
 };
 
 #endif //MAP_HPP
