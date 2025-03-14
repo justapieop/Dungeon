@@ -66,7 +66,7 @@ public:
     template <typename T>
     [[nodiscard]] bool has_component() const
     {
-        return this->component_bitset[get_component_id<T>];
+        return this->component_bitset[get_component_id<T>()];
     }
 
     template <typename T, typename... TArgs>

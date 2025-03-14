@@ -1,9 +1,9 @@
 //
 // Created by JustAPie on 2/7/2025.
 //
-
 #include "Game.hpp"
 
+#include "InputHandler.hpp"
 #include "SDL_image.h"
 #include "Utils.hpp"
 #include "SDL.h"
@@ -19,7 +19,7 @@ SDL_Renderer* Game::renderer = nullptr;
 
 SDL_Event Game::event;
 
-Map* Game::coll_map;
+Map* Game::coll_map = nullptr;
 
 Entity *player = nullptr;
 
@@ -59,6 +59,7 @@ void Game::init(const std::string& title, const int w, const int h)
                     renderer = SDL_CreateRenderer(this->window, i,
                                                   SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
                     SDL_Log("Using detected dGPU as the render device");
+                    SDL_Log("Using %s graphics engine", this->info.name);
                     break;
                 }
             }
@@ -83,26 +84,29 @@ void Game::init(const std::string& title, const int w, const int h)
 
         this->is_running = true;
 
+        SDL_Log("Loading collision map");
+        coll_map = new Map();
+        coll_map->load("./data/collision.data");
+
+        SDL_Log("Loading terrain map");
         this->map = new Map();
         this->map->load("./data/map.data");
         this->map->load_textures("./assets/");
 
         this->component_manager = new ComponentManager();
 
+        SDL_Log("Preparing player spawn");
         player = &this->component_manager->add_entity();
 
         player->add_components<TransformComponent>(300, 300);
         player->add_components<SpriteComponent>("assets/tile_0084.png");
+        player->add_components<InputHandler>();
 
         if (this->map->loaded())
         {
             SDL_Log("Drawing windows");
             SDL_ShowWindow(this->window);
             SDL_Log("Window drawn");
-
-            SDL_Log("Loading collision map");
-            Game::coll_map = new Map();
-            Game::coll_map->load("./data/collision.data");
         }
     }
     else
@@ -126,9 +130,10 @@ void Game::handle_events()
     }
 }
 
-void Game::update()
+void Game::update() const
 {
     this->component_manager->update();
+    //if (SDL_IntersectRect())
 }
 
 void Game::render() const

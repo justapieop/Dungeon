@@ -16,7 +16,7 @@ public:
 
     void init(const std::string& title, int w, int h);
     void handle_events();
-    void update();
+    void update() const;
     void render() const;
     void clean();
 

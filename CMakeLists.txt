@@ -33,6 +33,10 @@ add_executable(${PROJECT_NAME}
         include/TransformComponent.hpp
         src/TransformComponent.cpp
         include/Constants.hpp
+        include/CollisionComponent.hpp
+        src/CollisionComponent.cpp
+        include/InputHandler.hpp
+        src/InputHandler.cpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
