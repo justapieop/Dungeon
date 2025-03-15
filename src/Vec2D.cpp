@@ -50,6 +50,7 @@ Vec2D& Vec2D::multiply(const float f)
 
 Vec2D& Vec2D::divide(const float f)
 {
+    if (f == 0) return *this;
     this->x /= f;
     this->y /= f;
     return *this;
@@ -69,6 +70,7 @@ float Vec2D::length() const
 
 Vec2D& Vec2D::normalize()
 {
+    if (this->length() == 0.0f) return *this;
     this->divide(this->length());
     return *this;
 }
