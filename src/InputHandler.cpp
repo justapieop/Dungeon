@@ -22,38 +22,20 @@ void InputHandler::init()
 
 void InputHandler::update()
 {
-    if (const Uint8* key_state = SDL_GetKeyboardState(nullptr); key_state[SDL_SCANCODE_W])
-    {
-        this->transform_component->get_pos()->subtract(Vec2D(0.0f, 1.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_A])
-            this->transform_component->get_pos()->subtract(Vec2D(1.0f, 0.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_D])
-            this->transform_component->get_pos()->add(Vec2D(1.0f, 0.0f).multiply(this->transform_component->get_speed()));
-    }
-    else if (key_state[SDL_SCANCODE_S])
-    {
-        this->transform_component->get_pos()->add(Vec2D(0.0f, 1.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_A])
-            this->transform_component->get_pos()->subtract(Vec2D(1.0f, 0.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_D])
-            this->transform_component->get_pos()->add(Vec2D(1.0f, 0.0f).multiply(this->transform_component->get_speed()));
-    }
-    else if (key_state[SDL_SCANCODE_A])
-    {
-        this->transform_component->get_pos()->subtract(Vec2D(1.0f, 0.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_W])
-            this->transform_component->get_pos()->subtract(Vec2D(0.0f, 1.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_S])
-            this->transform_component->get_pos()->add(Vec2D(0.0f, 1.0f).multiply(this->transform_component->get_speed()));
-    }
-    else if (key_state[SDL_SCANCODE_D])
-    {
-        this->transform_component->get_pos()->add(Vec2D(1.0f, 0.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_W])
-            this->transform_component->get_pos()->subtract(Vec2D(0.0f, 1.0f).multiply(this->transform_component->get_speed()));
-        if (key_state[SDL_SCANCODE_S])
-            this->transform_component->get_pos()->add(Vec2D(0.0f, 1.0f).multiply(this->transform_component->get_speed()));
-    }
+    const Uint8* key_state = SDL_GetKeyboardState(nullptr);
+    auto *vec = new Vec2D();
+
+    if (key_state[SDL_SCANCODE_W])
+        vec->subtract(Vec2D(0.0, 1.0f));
+
+    if (key_state[SDL_SCANCODE_S])
+        vec->add(Vec2D(0.0f, 1.0f));
+
+    if (key_state[SDL_SCANCODE_A])
+        vec->subtract(Vec2D(1.0f, 0.0f));
+
+    if (key_state[SDL_SCANCODE_D])
+        vec->add(Vec2D(1.0f, 0.0f));
 
     if (this->transform_component->get_pos()->get_x() < 0)
         this->transform_component->get_pos()->set_pos(0.0f, this->transform_component->get_pos()->get_y());
@@ -63,6 +45,10 @@ void InputHandler::update()
         this->transform_component->get_pos()->set_pos(this->transform_component->get_pos()->get_x(), static_cast<float>(SCREEN_HEIGHT - 32));
     if (this->transform_component->get_pos()->get_x() >= SCREEN_WIDTH - 32)
         this->transform_component->get_pos()->set_pos(static_cast<float>(SCREEN_WIDTH - 32), this->transform_component->get_pos()->get_y());
-}
 
+    vec->normalize().multiply(this->transform_component->get_speed());
+    this->transform_component->get_pos()->add(*vec);
+    delete vec;
+    vec = nullptr;
+}
 
