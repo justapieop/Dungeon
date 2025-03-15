@@ -57,6 +57,11 @@ void Map::load_textures(const std::string& path)
     }
 }
 
+std::vector<std::vector<int>> Map::get_map() const
+{
+    return this->map;
+}
+
 
 bool Map::loaded() const
 {
