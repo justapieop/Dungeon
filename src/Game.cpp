@@ -87,11 +87,12 @@ void Game::init(const std::string& title, const int w, const int h)
         SDL_Log("Loading collision map");
         coll_map = new Map();
         coll_map->load("./data/collision.data");
+        coll_map->load_textures("./assets/collision/");
 
         SDL_Log("Loading terrain map");
         this->map = new Map();
         this->map->load("./data/map.data");
-        this->map->load_textures("./assets/");
+        this->map->load_textures("./assets/tiles/");
 
         this->component_manager = new ComponentManager();
 
@@ -99,7 +100,7 @@ void Game::init(const std::string& title, const int w, const int h)
         player = &this->component_manager->add_entity();
 
         player->add_components<TransformComponent>(300, 300);
-        player->add_components<SpriteComponent>("assets/tile_0084.png");
+        player->add_components<SpriteComponent>("./assets/tiles/tile_0084.png");
         player->add_components<InputHandler>();
 
         if (this->map->loaded())
@@ -139,6 +140,8 @@ void Game::update() const
 void Game::render() const
 {
     SDL_RenderClear(renderer);
+    // collision_map must be drawn first
+    coll_map->draw();
     this->map->draw();
     this->component_manager->draw();
     SDL_RenderPresent(renderer);
