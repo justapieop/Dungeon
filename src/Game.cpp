@@ -2,11 +2,10 @@
 // Created by JustAPie on 2/7/2025.
 //
 #include "Game.hpp"
-
 #include "InputHandler.hpp"
 #include "SDL_image.h"
 #include "Utils.hpp"
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include "SDL_ttf.h"
 #include "SpriteComponent.hpp"
 #include "string"
@@ -134,7 +133,7 @@ void Game::handle_events()
 void Game::update() const
 {
     this->component_manager->update();
-    //if (SDL_IntersectRect())
+
 }
 
 void Game::render() const
@@ -143,6 +142,7 @@ void Game::render() const
     // collision_map must be drawn first
     coll_map->draw();
     this->map->draw();
+    //coll_map->draw();
     this->component_manager->draw();
     SDL_RenderPresent(renderer);
 }

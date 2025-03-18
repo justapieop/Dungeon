@@ -2,7 +2,6 @@
 // Created by JustAPie on 14/03/2025.
 //
 #include "InputHandler.hpp"
-
 #include "Constants.hpp"
 #include "SDL2/SDL.h"
 
@@ -51,4 +50,3 @@ void InputHandler::update()
     delete vec;
     vec = nullptr;
 }
-
