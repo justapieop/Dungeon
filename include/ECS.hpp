@@ -6,7 +6,6 @@
 #ifndef ECS_HPP
 #define ECS_HPP
 #include "memory"
-#include "iostream"
 #include "bitset"
 #include "vector"
 

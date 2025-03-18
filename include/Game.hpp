@@ -5,7 +5,6 @@
 #define GAME_HPP
 #include "ECS.hpp"
 #include "Map.hpp"
-#include "SDL2/SDL.h"
 #include "string"
 
 class Game
