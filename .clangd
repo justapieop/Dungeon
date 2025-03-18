@@ -1,6 +1,7 @@
 CompileFlags:
   Add:
     - "--include-directory=include"
-
+Diagnostics:
+  UnusedIncludes: None
 Index:
   Background: Build
