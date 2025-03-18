@@ -1,0 +1,6 @@
+CompileFlags:
+  Add:
+    - "--include-directory=include"
+
+Index:
+  Background: Build
