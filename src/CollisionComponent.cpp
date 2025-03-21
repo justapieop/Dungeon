@@ -63,14 +63,12 @@ void CollisionComponent::update()
         pos->get_y() + dy
     );
     bool is_collided = false;
-    SDL_FRect res;
-
     this->sprite_component->get_rect().x += dx;
     this->sprite_component->get_rect().y += dy;
 
     for (int i = 0; i < this->hitboxes.size(); i++)
     {
-        if (SDL_IntersectFRect(&this->sprite_component->get_rect(), this->hitboxes[i].get(), &res))
+        if (SDL_HasIntersectionF(&this->sprite_component->get_rect(), this->hitboxes[i].get()))
         {
             is_collided = true;
         }
@@ -79,8 +77,4 @@ void CollisionComponent::update()
     {
         this->transform_component->set_pos(future->get_x(), future->get_y());
     }
-}
-
-[[nodiscard]] bool CollisionComponent::check_collision(const SDL_FRect *player, const SDL_FRect *object) {
-    return SDL_IntersectFRect(player, object, new SDL_FRect());
 }

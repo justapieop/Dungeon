@@ -21,8 +21,6 @@ public:
     void update() override;
     void draw() override;
     void init() override;
-
-   [[nodiscard]] static bool check_collision(const SDL_FRect* player, const SDL_FRect* object);
 private:
     SpriteComponent* sprite_component{};
     TransformComponent* transform_component{};
