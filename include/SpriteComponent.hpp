@@ -19,11 +19,13 @@ public:
     void draw() override;
     void init() override;
     void set_texture(SDL_Texture *texture);
+    [[nodiscard]] SDL_FRect& get_rect();
 
 private:
-    TransformComponent *transform{};
-    SDL_Texture *texture{};
-    SDL_Rect src{}, dest{};
+    TransformComponent* transform{};
+    SDL_Texture* texture{};
+    SDL_Rect src{};
+    SDL_FRect dest{};
 };
 
 #endif //SPRITECOMPONENT_HPP

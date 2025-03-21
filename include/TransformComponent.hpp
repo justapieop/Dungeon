@@ -6,26 +6,25 @@
 #define TRANSFORMCOMPONENT_HPP
 #include "ECS.hpp"
 #include "Vec2D.hpp"
+#include "InputHandler.hpp"
 
 class TransformComponent final : public Component
 {
 public:
     TransformComponent();
     TransformComponent(float x, float y);
-    TransformComponent(float x, float y, int w, int h);
     void init() override;
     void update() override;
     void draw() override;
-    [[nodiscard]] Vec2D* get_pos() const;
+    [[nodiscard]] Vec2D& get_pos() const;
     [[nodiscard]] float get_speed() const;
-    [[nodiscard]] int get_h() const;
-    [[nodiscard]] int get_w() const;
     void set_pos(float x, float y) const;
     void set_speed(float speed);
+    [[nodiscard]] InputHandler *get_input() const;
 private:
-    Vec2D *pos;
+    Vec2D* pos;
     float speed = 2.0f;
-    int h, w;
+    InputHandler* input_handler{};
 };
 
 #endif //TRANSFORMCOMPONENT_HPP

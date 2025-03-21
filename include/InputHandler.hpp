@@ -5,7 +5,7 @@
 #ifndef INPUTHANDLER_HPP
 #define INPUTHANDLER_HPP
 #include "ECS.hpp"
-#include "TransformComponent.hpp"
+#include "Vec2D.hpp"
 
 class InputHandler : public Component
 {
@@ -16,8 +16,10 @@ public:
     void init() override;
     void update() override;
     void draw() override;
+
+    [[nodiscard]] Vec2D& get_movement() const;
 private:
-    TransformComponent *transform_component{};
+    Vec2D *movement;
 };
 
 #endif //INPUTHANDLER_HPP

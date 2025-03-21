@@ -2,6 +2,7 @@
 // Created by JustAPie on 2/7/2025.
 //
 #include "Game.hpp"
+#include "CollisionComponent.hpp"
 #include "InputHandler.hpp"
 #include "SDL_image.h"
 #include "Utils.hpp"
@@ -101,6 +102,7 @@ void Game::init(const std::string& title, const int w, const int h)
         player->add_components<TransformComponent>(300, 300);
         player->add_components<SpriteComponent>("./assets/tiles/tile_0084.png");
         player->add_components<InputHandler>();
+        player->add_components<CollisionComponent>();
 
         if (this->map->loaded())
         {

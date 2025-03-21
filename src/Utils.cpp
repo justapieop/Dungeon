@@ -9,7 +9,7 @@
 
 void Utils::log_err_and_exit(const char* msg)
 {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, msg);
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "%s", msg);
     SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Quitting...");
     SDL_Quit();
 }
@@ -36,4 +36,3 @@ std::vector<std::vector<int>> Utils::load_matrix(const char* path, const int m, 
     }
     return temp;
 }
-
