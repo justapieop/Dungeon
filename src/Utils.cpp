@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 2/7/2025.
-//
-
 #include "Utils.hpp"
 #include "vector"
 #include "fstream"

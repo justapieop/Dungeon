@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 07/03/2025.
-//
-
 #ifndef TRANSFORMCOMPONENT_HPP
 #define TRANSFORMCOMPONENT_HPP
 #include "ECS.hpp"

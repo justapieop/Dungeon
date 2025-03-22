@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 14/03/2025.
-//
 #ifndef COLLISIONCOMPONENT_HPP
 #define COLLISIONCOMPONENT_HPP
 #include "ECS.hpp"

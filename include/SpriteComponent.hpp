@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 07/03/2025.
-//
-
 #ifndef SPRITECOMPONENT_HPP
 #define SPRITECOMPONENT_HPP
 

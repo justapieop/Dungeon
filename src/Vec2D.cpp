@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 2/23/2025.
-//
 #include "Vec2D.hpp"
 #include "cmath"
 

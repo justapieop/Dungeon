@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 2/23/2025.
-//
-
 #ifndef VEC2D_H
 #define VEC2D_H
 

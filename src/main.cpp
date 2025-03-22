@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 2/7/2025.
-//
 #include "Constants.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"

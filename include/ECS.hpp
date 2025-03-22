@@ -1,8 +1,4 @@
-//
-// Created by JustAPie on 06/03/2025.
 // Reference: Let's Make Games
-//
-
 #ifndef ECS_HPP
 #define ECS_HPP
 #include "memory"

@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 08/03/2025.
-//
 #include "TransformComponent.hpp"
 #include "Constants.hpp"
 #include "Game.hpp"

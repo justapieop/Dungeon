@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 2/19/2025.
-//
 #include "Map.hpp"
 #include "fstream"
 #include "TextureManager.hpp"

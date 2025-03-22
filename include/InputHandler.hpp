@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 14/03/2025.
-//
-
 #ifndef INPUTHANDLER_HPP
 #define INPUTHANDLER_HPP
 #include "ECS.hpp"

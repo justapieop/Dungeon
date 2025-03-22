@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 2/7/2025.
-//
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
 #include "InputHandler.hpp"

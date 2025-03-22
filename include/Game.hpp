@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 2/7/2025.
-//
 #ifndef GAME_HPP
 #define GAME_HPP
 #include "ECS.hpp"

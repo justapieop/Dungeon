@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 08/03/2025.
-//
-
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 

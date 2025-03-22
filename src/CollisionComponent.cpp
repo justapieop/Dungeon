@@ -1,6 +1,3 @@
-//
-// Created by JustAPie on 14/03/2025.
-//
 #include "CollisionComponent.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"

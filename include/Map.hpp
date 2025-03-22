@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 2/19/2025.
-//
-
 #ifndef MAP_HPP
 #define MAP_HPP
 #include "SDL2/SDL.h"

@@ -1,7 +1,3 @@
-//
-// Created by JustAPie on 2/8/2025.
-//
-
 #include "TextureManager.hpp"
 #include "Game.hpp"
 #include "SDL_image.h"
