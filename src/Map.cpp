@@ -31,7 +31,7 @@ void Map::draw()
             const int type = this->map[i][j];
             this->dest.x = j * 16;
             this->dest.y = i * 16;
-            TextureManager::draw(this->textures[type], this->src, this->dest);
+            if (type >= 0) TextureManager::draw(this->textures[type], this->src, this->dest);
         }
     }
 }
