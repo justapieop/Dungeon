@@ -39,6 +39,8 @@ add_executable(
         src/CollisionComponent.cpp
         include/InputHandler.hpp
         src/InputHandler.cpp
+        include/InventoryComponent.hpp
+        src/InventoryComponent.cpp
 )
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
