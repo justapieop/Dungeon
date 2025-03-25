@@ -13,7 +13,7 @@ public:
     void update() override;
     void draw() override;
 
-    [[nodiscard]] Vec2D& get_movement() const;
+    Vec2D& get_movement() const;
 private:
     Vec2D *movement;
 };

@@ -15,7 +15,7 @@ public:
     void draw() override;
     void init() override;
     void set_texture(SDL_Texture *texture);
-    [[nodiscard]] SDL_FRect& get_rect();
+    SDL_FRect& get_rect();
 
 private:
     TransformComponent* transform{};

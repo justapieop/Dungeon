@@ -12,11 +12,11 @@ public:
     void init() override;
     void update() override;
     void draw() override;
-    [[nodiscard]] Vec2D& get_pos() const;
-    [[nodiscard]] float get_speed() const;
+    Vec2D& get_pos() const;
+    float get_speed() const;
     void set_pos(float x, float y) const;
     void set_speed(float speed);
-    [[nodiscard]] InputHandler *get_input() const;
+    InputHandler *get_input() const;
 private:
     Vec2D* pos;
     float speed = 2.0f;

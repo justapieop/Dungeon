@@ -14,8 +14,8 @@ public:
     void draw();
     void load_textures(const std::string& path);
 
-    [[nodiscard]] bool loaded() const;
-    [[nodiscard]] std::vector<std::vector<int>> get_map() const;
+    bool loaded() const;
+    std::vector<std::vector<int>> get_map() const;
 private:
     SDL_Rect src{}, dest{};
     std::vector<SDL_Texture*> textures;

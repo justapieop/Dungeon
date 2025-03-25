@@ -138,10 +138,7 @@ void Game::update() const
 void Game::render() const
 {
     SDL_RenderClear(renderer);
-    // collision_map must be drawn first
-    coll_map->draw();
     this->map->draw();
-    //coll_map->draw();
     this->component_manager->draw();
     SDL_RenderPresent(renderer);
 }

@@ -16,7 +16,7 @@ public:
     void render() const;
     void clean();
 
-    [[nodiscard]] bool running() const;
+    bool running() const;
     static SDL_Renderer *renderer;
     static SDL_Event event;
     static Map *coll_map;
