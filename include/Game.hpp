@@ -2,6 +2,8 @@
 #define GAME_HPP
 #include "ECS.hpp"
 #include "Map.hpp"
+#include "SDL_ttf.h"
+#include "StateManager.hpp"
 #include "string"
 
 class Game
@@ -16,16 +18,17 @@ public:
     void render() const;
     void clean();
 
-    bool running() const;
+    static bool running();
+    static StateManager* state_manager;
     static SDL_Renderer *renderer;
     static SDL_Event event;
-    static Map *coll_map;
-
+    static Map *coll_map, *map;
+    static TTF_Font* font;
+    static void force_stop();
 private:
-    bool is_running{};
+    static bool is_running;
     SDL_RendererInfo info{};
     SDL_Window *window{};
-    Map *map{};
     ComponentManager* component_manager{};
 };
 

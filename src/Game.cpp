@@ -1,7 +1,11 @@
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
 #include "InputHandler.hpp"
+#include "MenuState.hpp"
+#include "PausedState.hpp"
+#include "PlayingState.hpp"
 #include "SDL_image.h"
+#include "StateManager.hpp"
 #include "Utils.hpp"
 #include "SDL2/SDL.h"
 #include "SDL_ttf.h"
@@ -12,13 +16,18 @@ Game::Game() = default;
 
 Game::~Game() = default;
 
+bool Game::is_running = false;
+
 SDL_Renderer* Game::renderer = nullptr;
 
 SDL_Event Game::event;
 
 Map* Game::coll_map = nullptr;
+Map* Game::map = nullptr;
 
-Entity *player = nullptr;
+StateManager* Game::state_manager = nullptr;
+
+TTF_Font* Game::font = nullptr;
 
 void Game::init(const std::string& title, const int w, const int h)
 {
@@ -79,7 +88,25 @@ void Game::init(const std::string& title, const int w, const int h)
             return;
         }
 
-        this->is_running = true;
+        SDL_Log("Initializing TTF font loader");
+        if (TTF_Init() == -1)
+        {
+            Utils::log_err_and_exit("Failed to initialize font loader");
+            return;
+        }
+
+        SDL_Log("Initialized TTF font loader");
+        SDL_Log("Loading font");
+        font = TTF_OpenFont("./fonts/EightBitDragon-anqx.ttf", 18);
+
+        if (font == nullptr)
+        {
+            Utils::log_err_and_exit("Failed to load font");
+            return;
+        }
+        SDL_Log("Font loaded");
+
+        is_running = true;
 
         SDL_Log("Loading collision map");
         coll_map = new Map();
@@ -87,21 +114,19 @@ void Game::init(const std::string& title, const int w, const int h)
         coll_map->load_textures("./assets/collision/");
 
         SDL_Log("Loading terrain map");
-        this->map = new Map();
-        this->map->load("./data/map.data");
-        this->map->load_textures("./assets/tiles/");
+        map = new Map();
+        map->load("./data/map.data");
+        map->load_textures("./assets/tiles/");
 
         this->component_manager = new ComponentManager();
 
-        SDL_Log("Preparing player spawn");
-        player = &this->component_manager->add_entity();
+        state_manager = new StateManager();
+        state_manager->get_states()[GameState::MENU] = new MenuState();
+        state_manager->set_state(GameState::MENU);
+        state_manager->get_states()[GameState::PLAYING] = new PlayingState();
+        state_manager->get_states()[GameState::PAUSED] = new PausedState();
 
-        player->add_components<TransformComponent>(300, 300);
-        player->add_components<SpriteComponent>("./assets/tiles/tile_0084.png");
-        player->add_components<InputHandler>();
-        player->add_components<CollisionComponent>();
-
-        if (this->map->loaded())
+        if (map->loaded())
         {
             SDL_Log("Drawing windows");
             SDL_ShowWindow(this->window);
@@ -120,26 +145,24 @@ void Game::handle_events()
 
     switch (event.type)
     {
-    case SDL_QUIT:
-        SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
-        this->is_running = false;
-        break;
-    default:
-        break;
+        case SDL_QUIT:
+            SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
+            is_running = false;
+            break;
+        default:
+            break;
     }
 }
 
 void Game::update() const
 {
-    this->component_manager->update();
-
+    state_manager->update();
 }
 
 void Game::render() const
 {
     SDL_RenderClear(renderer);
-    this->map->draw();
-    this->component_manager->draw();
+    state_manager->draw();
     SDL_RenderPresent(renderer);
 }
 
@@ -151,11 +174,16 @@ void Game::clean()
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();
-    this->is_running = false;
+    is_running = false;
 }
 
 
-bool Game::running() const
+bool Game::running()
 {
-    return this->is_running;
+    return is_running;
+}
+
+void Game::force_stop()
+{
+    is_running = false;
 }
