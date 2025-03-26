@@ -8,7 +8,7 @@ class InventoryComponent : public Component
 {
 public:
     InventoryComponent();
-    ~InventoryComponent();
+    ~InventoryComponent() override;
 
     void init() override;
     void draw() override;
