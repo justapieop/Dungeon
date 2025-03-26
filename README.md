@@ -5,7 +5,7 @@ Author: Đỗ Trần Thái An (24021349)
 
 # References
 
-Most of the codebase is taken reference from [Let's Make Games](https://www.youtube.com/@CarlBirch). Especially the entity component system (`ECS, ComponentManager, Entity`)
+Most of the codebase is referenced from [Let's Make Games](https://www.youtube.com/@CarlBirch). Especially the entity component system (`ECS, ComponentManager, Entity`)
 
 # Get started
 
