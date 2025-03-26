@@ -16,32 +16,9 @@ add_subdirectory(external/SDL_ttf EXCLUDE_FROM_ALL)
 add_subdirectory(external/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(external/SDL_mixer EXCLUDE_FROM_ALL)
 
-add_executable(
-        ${PROJECT_NAME}
-        src/main.cpp
-        src/Game.cpp
-        include/Game.hpp
-        src/Utils.cpp
-        include/Utils.hpp
-        src/TextureManager.cpp
-        include/TextureManager.hpp
-        include/Map.hpp
-        src/Map.cpp
-        include/Vec2D.hpp
-        src/Vec2D.cpp
-        include/ECS.hpp
-        include/SpriteComponent.hpp
-        src/SpriteComponent.cpp
-        include/TransformComponent.hpp
-        src/TransformComponent.cpp
-        include/Constants.hpp
-        include/CollisionComponent.hpp
-        src/CollisionComponent.cpp
-        include/InputHandler.hpp
-        src/InputHandler.cpp
-        include/InventoryComponent.hpp
-        src/InventoryComponent.cpp
-)
+file(GLOB SRC_FILES CONFIGURE_DEPENDS "src/*.cpp")
+
+add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
     if (WIN32)
