@@ -1,5 +1,4 @@
 #include "EventHandler.hpp"
-#include "Event.hpp"
 #include "string"
 
 void EventHandler::init()
