@@ -9,8 +9,8 @@ class EventHandler
 public:
     static void init();
 
-    template <typename T, typename... TArgs>
-    static void add_event(std::string event_name, TArgs... args);
+    template <typename T>
+    static void add_event(std::string event_name);
 
     template <typename T, typename... TArgs>
     static void trigger_event(std::string event_name, TArgs... args);

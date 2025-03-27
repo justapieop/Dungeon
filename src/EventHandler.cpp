@@ -7,8 +7,8 @@ void EventHandler::init()
     events = std::map<std::string, Event*>();
 }
 
-template <typename T, typename... TArgs>
-void EventHandler::add_event(std::string event_name, TArgs... args)
+template <typename T>
+void EventHandler::add_event(std::string event_name)
 {
     if (!events.count(event_name))
     {
