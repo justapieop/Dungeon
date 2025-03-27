@@ -1,9 +1,6 @@
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
 #include "InputHandler.hpp"
-#include "MenuState.hpp"
-#include "PausedState.hpp"
-#include "PlayingState.hpp"
 #include "SDL_image.h"
 #include "StateManager.hpp"
 #include "Utils.hpp"
@@ -121,10 +118,7 @@ void Game::init(const std::string& title, const int w, const int h)
         this->component_manager = new ComponentManager();
 
         state_manager = new StateManager();
-        state_manager->get_states()[GameState::MENU] = new MenuState();
         state_manager->set_state(GameState::MENU);
-        state_manager->get_states()[GameState::PLAYING] = new PlayingState();
-        state_manager->get_states()[GameState::PAUSED] = new PausedState();
 
         if (map->loaded())
         {

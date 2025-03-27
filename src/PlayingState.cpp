@@ -3,6 +3,7 @@
 #include "SDL2/SDL.h"
 #include "Game.hpp"
 #include "StateManager.hpp"
+#include "StatsComponent.hpp"
 #include "TransformComponent.hpp"
 #include "SpriteComponent.hpp"
 #include "CollisionComponent.hpp"
@@ -17,6 +18,7 @@ PlayingState::PlayingState()
     this->player->add_components<SpriteComponent>("./assets/tiles/tile_0084.png");
     this->player->add_components<InputHandler>();
     this->player->add_components<CollisionComponent>();
+    this->player->add_components<StatsComponent>();
 }
 
 PlayingState::~PlayingState() = default;
