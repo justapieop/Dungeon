@@ -24,6 +24,7 @@ enum GameState
 {
     MENU = 0,
     PLAYING = 1,
-    PAUSED = 2
+    PAUSED = 2,
+    GAME_OVER = 3
 };
 #endif //STATEMANAGER_HPP

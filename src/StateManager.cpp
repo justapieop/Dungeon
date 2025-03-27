@@ -1,4 +1,8 @@
 #include "StateManager.hpp"
+#include "GameOverState.hpp"
+#include "MenuState.hpp"
+#include "PausedState.hpp"
+#include "PlayingState.hpp"
 #include "State.hpp"
 #include "map"
 #include "memory"
@@ -6,6 +10,10 @@
 StateManager::StateManager()
 {
     this->states = std::map<int, State*>();
+    this->states[GameState::MENU] = new MenuState();
+    this->states[GameState::PLAYING] = new PlayingState();
+    this->states[GameState::PAUSED] = new PausedState();
+    this->states[GameState::GAME_OVER] = new GameOverState();
 }
 
 void StateManager::update()
