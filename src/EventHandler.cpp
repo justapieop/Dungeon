@@ -1,6 +1,8 @@
 #include "EventHandler.hpp"
 #include "string"
 
+std::map<std::string, Event*> EventHandler::events;
+
 void EventHandler::init()
 {
     events = std::map<std::string, Event*>();
