@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
+#include "EventHandler.hpp"
 #include "InputHandler.hpp"
 #include "SDL_image.h"
 #include "StateManager.hpp"
@@ -115,10 +116,10 @@ void Game::init(const std::string& title, const int w, const int h)
         map->load("./data/map.data");
         map->load_textures("./assets/tiles/");
 
-        this->component_manager = new ComponentManager();
-
         state_manager = new StateManager();
         state_manager->set_state(GameState::MENU);
+
+        EventHandler::init();
 
         if (map->loaded())
         {
@@ -170,7 +171,6 @@ void Game::clean()
     TTF_Quit();
     is_running = false;
 }
-
 
 bool Game::running()
 {

@@ -13,7 +13,7 @@ public:
     void update() override;
     void draw() override;
 private:
-    ComponentManager* component_manager{};
-    Entity* player;
+    ComponentManager *component_manager{};
+    Entity *player, *enemy;
 };
 #endif //PLAYINGSTATE_HPP

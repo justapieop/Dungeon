@@ -20,7 +20,7 @@ public:
 
     static bool running();
     static StateManager* state_manager;
-    static SDL_Renderer *renderer;
+    static SDL_Renderer* renderer;
     static SDL_Event event;
     static Map *coll_map, *map;
     static TTF_Font* font;
@@ -28,8 +28,7 @@ public:
 private:
     static bool is_running;
     SDL_RendererInfo info{};
-    SDL_Window *window{};
-    ComponentManager* component_manager{};
+    SDL_Window* window{};
 };
 
 
