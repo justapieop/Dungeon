@@ -3,6 +3,7 @@
 #include "EventHandler.hpp"
 #include "InputHandler.hpp"
 #include "SDL_image.h"
+#include "SDL_mixer.h"
 #include "StateManager.hpp"
 #include "Utils.hpp"
 #include "SDL2/SDL.h"
@@ -116,6 +117,13 @@ void Game::init(const std::string& title, const int w, const int h)
         map->load("./data/map.data");
         map->load_textures("./assets/tiles/");
 
+        SDL_Log("Loading audio player");
+        if (Mix_OpenAudio(96000, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+        {
+            Utils::log_err_and_exit("Failed to load audio player");
+            return;
+        }
+
         state_manager = new StateManager();
         state_manager->set_state(GameState::MENU);
 
@@ -166,9 +174,10 @@ void Game::clean()
     SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Destroying window and renderer");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(this->window);
-    SDL_Quit();
     IMG_Quit();
     TTF_Quit();
+    Mix_Quit();
+    SDL_Quit();
     is_running = false;
 }
 

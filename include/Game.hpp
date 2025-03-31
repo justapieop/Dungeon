@@ -2,6 +2,7 @@
 #define GAME_HPP
 #include "ECS.hpp"
 #include "Map.hpp"
+#include "SDL2/SDL.h"
 #include "SDL_ttf.h"
 #include "StateManager.hpp"
 #include "string"

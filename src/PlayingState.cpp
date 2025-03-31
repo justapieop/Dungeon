@@ -6,6 +6,7 @@
 #include "Game.hpp"
 #include "EventHandler.hpp"
 #include "SDL_keycode.h"
+#include "SDL_mixer.h"
 #include "SDL_rect.h"
 #include "StateManager.hpp"
 #include "StatsComponent.hpp"
@@ -16,6 +17,8 @@
 
 PlayingState::PlayingState()
 {
+    this->music = Mix_LoadMUS("./assets/audio/bg.mp3");
+    Mix_PlayMusic(this->music, -1);
     this->component_manager = new ComponentManager();
 
     this->player = &this->component_manager->add_entity();
@@ -34,7 +37,10 @@ PlayingState::PlayingState()
     this->enemy->add_components<CurrentStatComponent>();
 }
 
-PlayingState::~PlayingState() = default;
+PlayingState::~PlayingState()
+{
+    Mix_FreeMusic(this->music);
+}
 
 void PlayingState::update()
 {
