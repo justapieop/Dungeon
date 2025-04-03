@@ -1,11 +1,8 @@
 #include "EnemyEncounterEvent.hpp"
-#include "CurrentStatComponent.hpp"
 #include "ECS.hpp"
-#include "InputHandler.hpp"
-#include "SDL2/SDL.h"
-#include "SDL_log.h"
+#include "Game.hpp"
+#include "StateManager.hpp"
 #include "utility"
-#include "any"
 
 EnemyEncounterEvent::EnemyEncounterEvent() = default;
 
@@ -14,5 +11,7 @@ EnemyEncounterEvent::~EnemyEncounterEvent() = default;
 void EnemyEncounterEvent::execute()
 {
     Entity *player = std::any_cast<Entity*>(this->get_event_args().get_args()[0]);
+    Entity *enemy = std::any_cast<Entity*>(this->get_event_args().get_args()[1]);
 
+    Game::state_manager->set_state(GameState::FIGHTING, player, enemy);
 }

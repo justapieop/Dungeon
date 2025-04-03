@@ -1,7 +1,5 @@
 #ifndef MENUSTATE_HPP
 #define MENUSTATE_HPP
-#include "SDL_rect.h"
-#include "SDL_render.h"
 #include "State.hpp"
 #include "SDL2/SDL.h"
 

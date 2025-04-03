@@ -6,14 +6,11 @@
 #include "State.hpp"
 #include "map"
 #include "memory"
+#include "utility"
 
 StateManager::StateManager()
 {
     this->states = std::map<int, State*>();
-    this->states[GameState::MENU] = new MenuState();
-    this->states[GameState::PLAYING] = new PlayingState();
-    this->states[GameState::PAUSED] = new PausedState();
-    this->states[GameState::GAME_OVER] = new GameOverState();
 }
 
 void StateManager::update()
@@ -39,9 +36,4 @@ std::map<int, State*>& StateManager::get_states()
 int StateManager::get_state() const
 {
     return this->state;
-}
-
-void StateManager::set_state(int state)
-{
-    this->state = state;
 }
