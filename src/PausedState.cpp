@@ -9,17 +9,17 @@ PausedState::~PausedState() = default;
 
 void PausedState::update()
 {
-    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
-
-    if (key_states[SDL_SCANCODE_KP_ENTER])
+    if (Game::event.type != SDL_KEYDOWN) return;
+    if (Game::event.key.keysym.sym == 13)
     {
-        Game::state_manager->set_state(GameState::PLAYING);
+        Game::state_manager->set_state(Game::state_manager->get_previous_state());
     }
 
-    if (key_states[SDL_SCANCODE_ESCAPE])
+    if (Game::event.key.keysym.sym == SDLK_ESCAPE)
     {
         Game::state_manager->set_state(GameState::MENU);
     }
+
 }
 
 void PausedState::draw()

@@ -1,10 +1,8 @@
 #include "PlayingState.hpp"
 #include "CurrentStatComponent.hpp"
 #include "ECS.hpp"
-#include "EventHandler.hpp"
 #include "SDL2/SDL.h"
 #include "Game.hpp"
-#include "EventHandler.hpp"
 #include "StateManager.hpp"
 #include "StatsComponent.hpp"
 #include "TransformComponent.hpp"
@@ -41,13 +39,6 @@ PlayingState::~PlayingState()
 
 void PlayingState::update()
 {
-
-    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
-    if (key_states[SDL_SCANCODE_ESCAPE])
-    {
-        Game::state_manager->set_state(GameState::PAUSED);
-    }
-
     this->component_manager->update();
 
     if (
@@ -57,7 +48,14 @@ void PlayingState::update()
         )
     )
     {
-        EventHandler::trigger_event("enemy_encounter_event", player, enemy);
+        Game::state_manager->set_state(GameState::FIGHTING, player, enemy);
+        return;
+    }
+
+    if (Game::event.type != SDL_KEYDOWN) return;
+    if (Game::event.key.keysym.sym == SDLK_ESCAPE)
+    {
+        Game::state_manager->set_state(GameState::PAUSED);
     }
 }
 

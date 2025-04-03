@@ -1,4 +1,5 @@
 #include "FightingState.hpp"
+#include "BattleUI.hpp"
 #include "Constants.hpp"
 #include "CurrentStatComponent.hpp"
 #include "Game.hpp"
@@ -10,6 +11,7 @@ FightingState::FightingState()
 {
     this->is_my_turn = true;
     this->status_text = std::string();
+    this->ui = new BattleUI();
 }
 
 FightingState::~FightingState() = default;
@@ -23,10 +25,9 @@ void FightingState::update()
 
     const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
 
-    if (key_states[SDL_SCANCODE_A])
+    if (key_states[SDL_SCANCODE_SPACE] && key_states[SDL_SCANCODE_ESCAPE])
     {
-        if (!this->my_turn()) return;
-        enemy_current->set_hp(enemy_current->get_hp() - (BASE_DAMAGE + 1.36 * player_current->get_atk() - enemy_current->get_def()));
+        Game::state_manager->set_state(GameState::PAUSED);
         return;
     }
 
@@ -39,11 +40,12 @@ void FightingState::update()
     {
         Game::state_manager->set_state(GameState::VICTORY);
     }
+    this->ui->update(*player, *enemy);
 }
 
 void FightingState::draw()
 {
-
+    this->ui->draw();
 }
 
 void FightingState::set_my_turn(bool is_my_turn)

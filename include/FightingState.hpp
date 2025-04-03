@@ -1,5 +1,6 @@
 #ifndef FIGHTINGSTATE_HPP
 #define FIGHTINGSTATE_HPP
+#include "BattleUI.hpp"
 #include "ECS.hpp"
 #include "State.hpp"
 #include "string"
@@ -19,5 +20,6 @@ private:
     bool is_my_turn;
     Entity *player{}, *enemy{};
     std::string status_text;
+    BattleUI *ui;
 };
 #endif //FIGHTINGSTATE_HPP

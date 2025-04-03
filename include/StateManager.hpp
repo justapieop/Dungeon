@@ -22,12 +22,11 @@ class StateManager
 public:
     StateManager();
     ~StateManager();
-
-    int get_state() const;
-
     template <typename... TArgs>
     inline void set_state(int state, TArgs&&... args)
     {
+        bool set_prev = this->previous_state == state;
+        this->previous_state = this->state;
         this->state = state;
         State *obj = nullptr;
         if (!this->states.count(state))
@@ -54,16 +53,22 @@ public:
 
         obj = this->states[this->state];
 
-        obj->get_args().clear();
-        (obj->get_args().push_back(std::forward<TArgs>(args)), ...);
+        if (!set_prev)
+        {
+            obj->get_args().clear();
+            (obj->get_args().push_back(std::forward<TArgs>(args)), ...);
+        }
     }
 
-    State& get_current_state();
+    State& get_current_state_obj();
+    State& get_previous_state_obj();
     void update();
     void draw();
     std::map<int, State*>& get_states();
+    int get_state() const;
+    int get_previous_state() const;
 private:
     std::map<int, State*> states;
-    int state;
+    int state, previous_state;
 };
 #endif //STATEMANAGER_HPP

@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
-#include "EventHandler.hpp"
 #include "InputHandler.hpp"
+#include "SDL_events.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include "StateManager.hpp"
@@ -10,6 +10,7 @@
 #include "SDL_ttf.h"
 #include "SpriteComponent.hpp"
 #include "string"
+#include <cstddef>
 
 Game::Game() = default;
 
@@ -21,6 +22,8 @@ SDL_Renderer* Game::renderer = nullptr;
 
 Map* Game::coll_map = nullptr;
 Map* Game::map = nullptr;
+
+SDL_Event Game::event;
 
 StateManager* Game::state_manager = nullptr;
 
@@ -125,8 +128,6 @@ void Game::init(const std::string& title, const int w, const int h)
         state_manager = new StateManager();
         state_manager->set_state(GameState::MENU);
 
-        EventHandler::init();
-
         if (map->loaded())
         {
             SDL_Log("Drawing windows");
@@ -142,13 +143,16 @@ void Game::init(const std::string& title, const int w, const int h)
 
 void Game::handle_events()
 {
-    SDL_PollEvent(&this->event);
+    SDL_PollEvent(&event);
 
-    switch (this->event.type)
+    switch (event.type)
     {
         case SDL_QUIT:
             SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
             is_running = false;
+            break;
+        case SDL_MOUSEMOTION:
+            //SDL_Log("x = %d, y = %d", this->event.motion.x, this->event.motion.y);
             break;
         default:
             break;

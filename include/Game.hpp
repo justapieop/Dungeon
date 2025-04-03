@@ -25,11 +25,11 @@ public:
     static Map *coll_map, *map;
     static TTF_Font* font;
     static void force_stop();
+    static SDL_Event event;
 private:
     static bool is_running;
     SDL_RendererInfo info{};
     SDL_Window* window{};
-    SDL_Event event;
 };
 
 

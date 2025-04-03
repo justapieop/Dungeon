@@ -9,14 +9,14 @@ GameOverState::~GameOverState() = default;
 
 void GameOverState::update()
 {
-    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+    if (Game::event.type != SDL_KEYDOWN) return;
 
-    if (key_states[SDL_SCANCODE_SPACE])
+    if (Game::event.key.keysym.sym == SDLK_SPACE)
     {
         Game::state_manager->set_state(GameState::MENU);
     }
 
-    if (key_states[SDL_SCANCODE_ESCAPE])
+    if (Game::event.key.keysym.sym == SDLK_ESCAPE)
     {
         Game::force_stop();
     }
