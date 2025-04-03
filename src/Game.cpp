@@ -19,8 +19,6 @@ bool Game::is_running = false;
 
 SDL_Renderer* Game::renderer = nullptr;
 
-SDL_Event Game::event;
-
 Map* Game::coll_map = nullptr;
 Map* Game::map = nullptr;
 
@@ -144,9 +142,9 @@ void Game::init(const std::string& title, const int w, const int h)
 
 void Game::handle_events()
 {
-    SDL_PollEvent(&event);
+    SDL_PollEvent(&this->event);
 
-    switch (event.type)
+    switch (this->event.type)
     {
         case SDL_QUIT:
             SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");

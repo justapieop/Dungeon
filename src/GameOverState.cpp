@@ -1,7 +1,6 @@
 #include "GameOverState.hpp"
 #include "Game.hpp"
-#include "SDL_events.h"
-#include "SDL_keycode.h"
+#include "SDL2/SDL.h"
 #include "StateManager.hpp"
 
 GameOverState::GameOverState() = default;
@@ -10,20 +9,16 @@ GameOverState::~GameOverState() = default;
 
 void GameOverState::update()
 {
-    switch (Game::event.type)
+    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+
+    if (key_states[SDL_SCANCODE_SPACE])
     {
-        case SDL_KEYDOWN:
-            if (Game::event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Game::state_manager->set_state(GameState::MENU);
-            }
-            if (Game::event.key.keysym.sym == SDLK_SPACE)
-            {
-                Game::force_stop();
-            }
-            break;
-        default:
-            break;
+        Game::state_manager->set_state(GameState::MENU);
+    }
+
+    if (key_states[SDL_SCANCODE_ESCAPE])
+    {
+        Game::force_stop();
     }
 }
 

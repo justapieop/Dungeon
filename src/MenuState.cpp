@@ -1,11 +1,6 @@
 #include "MenuState.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_keycode.h"
-#include "SDL_rect.h"
-#include "SDL_render.h"
-#include "SDL_surface.h"
-#include "SDL_ttf.h"
 #include "StateManager.hpp"
 
 MenuState::MenuState() = default;
@@ -14,20 +9,16 @@ MenuState::~MenuState() = default;
 
 void MenuState::update()
 {
-    switch (Game::event.type)
+    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+
+    if (key_states[SDL_SCANCODE_SPACE])
     {
-        case SDL_KEYDOWN:
-            if (Game::event.key.keysym.sym == SDLK_SPACE)
-            {
-                Game::state_manager->set_state(GameState::PLAYING);
-            }
-            if (Game::event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Game::force_stop();
-            }
-            break;
-        default:
-            break;
+        Game::state_manager->set_state(GameState::PLAYING);
+    }
+
+    if (key_states[SDL_SCANCODE_ESCAPE])
+    {
+        Game::force_stop();
     }
 }
 

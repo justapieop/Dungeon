@@ -1,13 +1,15 @@
 #include "FightingState.hpp"
+#include "Constants.hpp"
 #include "CurrentStatComponent.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_events.h"
 #include "StateManager.hpp"
+#include "string"
 
 FightingState::FightingState()
 {
     this->is_my_turn = true;
+    this->status_text = std::string();
 }
 
 FightingState::~FightingState() = default;
@@ -16,24 +18,24 @@ void FightingState::update()
 {
     this->player = std::any_cast<Entity*>(this->get_args()[0]);
     this->enemy = std::any_cast<Entity*>(this->get_args()[1]);
-    switch (Game::event.type)
+    CurrentStatComponent *player_current = &this->player->get_component<CurrentStatComponent>();
+    CurrentStatComponent *enemy_current = &this->enemy->get_component<CurrentStatComponent>();
+
+    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+
+    if (key_states[SDL_SCANCODE_A])
     {
-        case SDL_KEYDOWN:
-            if (Game::event.key.keysym.sym == SDLK_a)
-            {
-                return;
-            }
-            break;
-        default:
-            break;
+        if (!this->my_turn()) return;
+        enemy_current->set_hp(enemy_current->get_hp() - (BASE_DAMAGE + 1.36 * player_current->get_atk() - enemy_current->get_def()));
+        return;
     }
 
-    if (this->player->get_component<CurrentStatComponent>().get_hp() == 0.0f)
+    if (player_current->get_hp() == 0.0f)
     {
         Game::state_manager->set_state(GameState::GAME_OVER);
         return;
     }
-    if (this->enemy->get_component<CurrentStatComponent>().get_hp() == 0.0f)
+    if (enemy_current->get_hp() == 0.0f)
     {
         Game::state_manager->set_state(GameState::VICTORY);
     }

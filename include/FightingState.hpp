@@ -2,6 +2,8 @@
 #define FIGHTINGSTATE_HPP
 #include "ECS.hpp"
 #include "State.hpp"
+#include "string"
+
 class FightingState : public State
 {
 public:
@@ -16,5 +18,6 @@ public:
 private:
     bool is_my_turn;
     Entity *player{}, *enemy{};
+    std::string status_text;
 };
 #endif //FIGHTINGSTATE_HPP

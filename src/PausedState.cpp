@@ -1,7 +1,6 @@
 #include "PausedState.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_keycode.h"
 #include "StateManager.hpp"
 
 PausedState::PausedState() = default;
@@ -10,20 +9,16 @@ PausedState::~PausedState() = default;
 
 void PausedState::update()
 {
-    switch (Game::event.type)
+    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+
+    if (key_states[SDL_SCANCODE_KP_ENTER])
     {
-        case SDL_KEYDOWN:
-            if (Game::event.key.keysym.sym == 13)
-            {
-                Game::state_manager->set_state(GameState::PLAYING);
-            }
-            if (Game::event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Game::state_manager->set_state(GameState::MENU);
-            }
-            break;
-        default:
-            break;
+        Game::state_manager->set_state(GameState::PLAYING);
+    }
+
+    if (key_states[SDL_SCANCODE_ESCAPE])
+    {
+        Game::state_manager->set_state(GameState::MENU);
     }
 }
 

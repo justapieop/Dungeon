@@ -22,7 +22,6 @@ public:
     static bool running();
     static StateManager* state_manager;
     static SDL_Renderer* renderer;
-    static SDL_Event event;
     static Map *coll_map, *map;
     static TTF_Font* font;
     static void force_stop();
@@ -30,6 +29,7 @@ private:
     static bool is_running;
     SDL_RendererInfo info{};
     SDL_Window* window{};
+    SDL_Event event;
 };
 
 

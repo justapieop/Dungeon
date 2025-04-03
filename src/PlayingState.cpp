@@ -5,9 +5,6 @@
 #include "SDL2/SDL.h"
 #include "Game.hpp"
 #include "EventHandler.hpp"
-#include "SDL_keycode.h"
-#include "SDL_mixer.h"
-#include "SDL_rect.h"
 #include "StateManager.hpp"
 #include "StatsComponent.hpp"
 #include "TransformComponent.hpp"
@@ -45,30 +42,12 @@ PlayingState::~PlayingState()
 void PlayingState::update()
 {
 
-    switch (Game::event.type)
+    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+    if (key_states[SDL_SCANCODE_ESCAPE])
     {
-        case SDL_KEYDOWN:
-            if (Game::event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Game::state_manager->set_state(GameState::PAUSED);
-            }
-            if (Game::event.key.keysym.sym == SDLK_e)
-            {
-                int x, y;
-                for (int i = -1; i < 2; i++)
-                {
-                    for (int j = -1; j < 2; j++)
-                    {
-                       x = this->player->get_component<SpriteComponent>().get_rect().x + 16 * j;
-                       y =this->player->get_component<SpriteComponent>().get_rect().y + 16 * i;
-
-                    }
-                }
-            }
-            break;
-        default:
-            break;
+        Game::state_manager->set_state(GameState::PAUSED);
     }
+
     this->component_manager->update();
 
     if (
