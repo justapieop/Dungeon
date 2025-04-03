@@ -1,16 +1,12 @@
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
 #include "InputHandler.hpp"
-#include "SDL_events.h"
 #include "SDL_image.h"
-#include "SDL_mixer.h"
 #include "StateManager.hpp"
 #include "Utils.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_ttf.h"
 #include "SpriteComponent.hpp"
 #include "string"
-#include <cstddef>
 
 Game::Game() = default;
 
