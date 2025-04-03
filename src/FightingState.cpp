@@ -25,7 +25,7 @@ void FightingState::update()
 
     const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
 
-    if (key_states[SDL_SCANCODE_SPACE] && key_states[SDL_SCANCODE_ESCAPE])
+    if (key_states[SDL_SCANCODE_ESCAPE])
     {
         Game::state_manager->set_state(GameState::PAUSED);
         return;
