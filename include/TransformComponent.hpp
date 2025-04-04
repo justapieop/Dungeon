@@ -16,7 +16,7 @@ public:
     float get_speed() const;
     void set_pos(float x, float y) const;
     void set_speed(float speed);
-    InputHandler *get_input() const;
+    InputHandler& get_input() const;
 private:
     Vec2D* pos;
     float speed = 2.0f;

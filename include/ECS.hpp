@@ -59,7 +59,7 @@ public:
     }
 
     template <typename T>
-    [[nodiscard]] bool has_component() const
+    bool has_component() const
     {
         return this->component_bitset[get_component_id<T>()];
     }
@@ -87,7 +87,7 @@ public:
     }
 
 
-    [[nodiscard]] bool active() const
+    bool active() const
     {
         return this->is_active;
     }

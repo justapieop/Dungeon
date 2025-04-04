@@ -3,8 +3,8 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_main.h"
 
-Game* game;
-unsigned int frame_time, frame_start;
+Game* game = nullptr;
+unsigned int frame_time = 0, frame_start = 0;
 
 int main(int argc, char* argv[])
 {

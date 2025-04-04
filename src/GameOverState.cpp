@@ -1,30 +1,30 @@
-#include "PausedState.hpp"
+#include "GameOverState.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include "StateManager.hpp"
 
-PausedState::PausedState() = default;
+GameOverState::GameOverState() = default;
 
-PausedState::~PausedState() = default;
+GameOverState::~GameOverState() = default;
 
-void PausedState::update()
+void GameOverState::update()
 {
     if (Game::event.type != SDL_KEYDOWN) return;
-    if (Game::event.key.keysym.sym == 13)
-    {
-        Game::state_manager->set_state(Game::state_manager->get_previous_state());
-    }
 
-    if (Game::event.key.keysym.sym == SDLK_ESCAPE)
+    if (Game::event.key.keysym.sym == SDLK_SPACE)
     {
         Game::state_manager->set_state(GameState::MENU);
     }
 
+    if (Game::event.key.keysym.sym == SDLK_ESCAPE)
+    {
+        Game::force_stop();
+    }
 }
 
-void PausedState::draw()
+void GameOverState::draw()
 {
-    this->title_text = TTF_RenderText_Blended(Game::font, "Press ENTER to continue", { 255, 255, 255, SDL_ALPHA_OPAQUE });
+    this->title_text = TTF_RenderText_Blended(Game::font, "Press SPACEBAR to quit", { 255, 255, 255, SDL_ALPHA_OPAQUE });
     this->title = SDL_CreateTextureFromSurface(Game::renderer, this->title_text);
     this->exit_text = TTF_RenderText_Blended(Game::font, "Press ESC to return to menu", { 255, 255, 255, SDL_ALPHA_OPAQUE });
     this->exit = SDL_CreateTextureFromSurface(Game::renderer, this->exit_text);

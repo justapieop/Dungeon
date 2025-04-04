@@ -54,7 +54,7 @@ Vec2D& TransformComponent::get_pos() const
     return *this->pos;
 }
 
-[[nodiscard]] InputHandler *TransformComponent::get_input() const
+InputHandler& TransformComponent::get_input() const
 {
-    return this->input_handler;
+    return *this->input_handler;
 }

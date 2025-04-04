@@ -1,14 +1,10 @@
 #include "Game.hpp"
 #include "CollisionComponent.hpp"
 #include "InputHandler.hpp"
-#include "MenuState.hpp"
-#include "PausedState.hpp"
-#include "PlayingState.hpp"
 #include "SDL_image.h"
 #include "StateManager.hpp"
 #include "Utils.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_ttf.h"
 #include "SpriteComponent.hpp"
 #include "string"
 
@@ -20,10 +16,10 @@ bool Game::is_running = false;
 
 SDL_Renderer* Game::renderer = nullptr;
 
-SDL_Event Game::event;
-
 Map* Game::coll_map = nullptr;
 Map* Game::map = nullptr;
+
+SDL_Event Game::event;
 
 StateManager* Game::state_manager = nullptr;
 
@@ -118,13 +114,15 @@ void Game::init(const std::string& title, const int w, const int h)
         map->load("./data/map.data");
         map->load_textures("./assets/tiles/");
 
-        this->component_manager = new ComponentManager();
+        SDL_Log("Loading audio player");
+        if (Mix_OpenAudio(96000, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+        {
+            Utils::log_err_and_exit("Failed to load audio player");
+            return;
+        }
 
         state_manager = new StateManager();
-        state_manager->get_states()[GameState::MENU] = new MenuState();
         state_manager->set_state(GameState::MENU);
-        state_manager->get_states()[GameState::PLAYING] = new PlayingState();
-        state_manager->get_states()[GameState::PAUSED] = new PausedState();
 
         if (map->loaded())
         {
@@ -149,6 +147,9 @@ void Game::handle_events()
             SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
             is_running = false;
             break;
+        case SDL_MOUSEMOTION:
+            //SDL_Log("x = %d, y = %d", this->event.motion.x, this->event.motion.y);
+            break;
         default:
             break;
     }
@@ -171,12 +172,12 @@ void Game::clean()
     SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Destroying window and renderer");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(this->window);
-    SDL_Quit();
     IMG_Quit();
     TTF_Quit();
+    Mix_Quit();
+    SDL_Quit();
     is_running = false;
 }
-
 
 bool Game::running()
 {

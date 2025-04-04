@@ -1,13 +1,13 @@
-#ifndef MENUSTATE_HPP
-#define MENUSTATE_HPP
+#ifndef GAMEOVERSTATE_HPP
+#define GAMEOVERSTATE_HPP
 #include "State.hpp"
 #include "SDL2/SDL.h"
 
-class MenuState : public State
+class GameOverState : public State
 {
 public:
-    MenuState();
-    ~MenuState() override;
+    GameOverState();
+    ~GameOverState() override;
 
     void update() override;
     void draw() override;
@@ -17,4 +17,4 @@ private:
     SDL_Rect *dest, *dest2;
 };
 
-#endif //MENUSTATE_HPP
+#endif //GAMEOVERSTATE_HPP

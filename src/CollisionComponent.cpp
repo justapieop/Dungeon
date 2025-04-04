@@ -51,7 +51,7 @@ void CollisionComponent::init()
 
 void CollisionComponent::update()
 {
-    Vec2D *movement = &this->transform_component->get_input()->get_movement();
+    Vec2D *movement = &this->transform_component->get_input().get_movement();
     Vec2D *pos = &this->transform_component->get_pos();
     float dx = movement->get_x() * this->transform_component->get_speed();
     float dy = movement->get_y() * this->transform_component->get_speed();
