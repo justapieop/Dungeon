@@ -2,7 +2,9 @@
 #define BATTLEUI_HPP
 #include "ECS.hpp"
 #include "SDL2/SDL.h"
-#include "SDL_rect.h"
+#include "Selection.hpp"
+#include "StatsUI.hpp"
+#include "vector"
 
 class BattleUI
 {
@@ -10,10 +12,14 @@ public:
     BattleUI();
     ~BattleUI();
 
-    void update(const Entity& player, const Entity& enemy);
+    void update(Entity& player, Entity& enemy);
     void draw();
+    std::vector<Selection*>& get_sel();
+    int get_current() const;
+    void set_current(int current);
 private:
-    SDL_Rect *attack, *attack_dest, *heal, *heal_dest;
-    SDL_Texture *button;
+    std::vector<Selection*> sel;
+    StatsUI *player, *enemy;
+    int current;
 };
 #endif //BATTLEUI_HPP

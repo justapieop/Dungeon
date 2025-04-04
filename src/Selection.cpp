@@ -36,11 +36,6 @@ void Selection::draw()
     TextureManager::draw(this->label, *this->label_src, *this->label_dest);
 }
 
-void Selection::update()
-{
-
-}
-
 void Selection::set_label_text(const std::string& label_text)
 {
     this->label_text = label_text;

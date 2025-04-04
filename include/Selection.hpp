@@ -11,7 +11,6 @@ public:
     ~Selection();
 
     void draw();
-    void update();
 
     void set_label_text(const std::string& label_text);
     std::string& get_label_text();
