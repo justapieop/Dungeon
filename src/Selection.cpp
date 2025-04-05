@@ -18,8 +18,11 @@ Selection::Selection(int x, int y, const std::string& label)
 
     this->txt = new Text(x + this->button_dest->w + 10, y + this->button_dest->h / 2, 100, 20, this->label_text);
     this->txt->create_text();
+<<<<<<< HEAD
 
     this->action = Action::ATTACK;
+=======
+>>>>>>> 30860a8d356dfb457d2db61651154de0d7947c1a
 }
 
 Selection::~Selection() = default;

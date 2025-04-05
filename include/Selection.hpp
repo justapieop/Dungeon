@@ -24,7 +24,10 @@ private:
     SDL_Texture *selection, *button;
     bool is_active;
     std::string label_text;
+<<<<<<< HEAD
     Action action;
+=======
+>>>>>>> 30860a8d356dfb457d2db61651154de0d7947c1a
 
     Text *txt;
 };
