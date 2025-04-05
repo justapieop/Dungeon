@@ -1,5 +1,4 @@
 #include "CurrentStatComponent.hpp"
-#include "StatsComponent.hpp"
 
 CurrentStatComponent::CurrentStatComponent() = default;
 

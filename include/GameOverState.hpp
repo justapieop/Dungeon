@@ -12,9 +12,9 @@ public:
     void update() override;
     void draw() override;
 private:
-    SDL_Surface *title_text, *exit_text;
-    SDL_Texture *title, *exit;
-    SDL_Rect *dest, *dest2;
+    SDL_Surface *title_text{}, *exit_text{};
+    SDL_Texture *title{}, *exit{};
+    SDL_Rect *dest{}, *dest2{};
 };
 
 #endif //GAMEOVERSTATE_HPP

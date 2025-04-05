@@ -2,8 +2,6 @@
 #include "TextureManager.hpp"
 #include "Utils.hpp"
 #include "filesystem"
-#include "fstream"
-#include "iostream"
 
 Map::Map() {
     this->is_loaded = false;

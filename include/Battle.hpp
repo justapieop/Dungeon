@@ -19,11 +19,11 @@ public:
     void set_turn(bool turn);
 
     BattleWinner determine() const;
-    float attack(bool invaded);
+    float attack(bool invaded) const;
     float heal();
     void flee();
 private:
     bool turn;
-    Entity *player, *enemy;
+    Entity *player{}, *enemy{};
 };
 #endif

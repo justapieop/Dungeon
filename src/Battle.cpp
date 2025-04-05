@@ -12,7 +12,7 @@ void Battle::set_entities(Entity& player, Entity& enemy) {
 
 Battle::~Battle() = default;
 
-float Battle::attack(const bool invaded = false) {
+float Battle::attack(const bool invaded = false) const {
     CurrentStatComponent* player_current =
         &this->player->get_component<CurrentStatComponent>();
     CurrentStatComponent* enemy_current =

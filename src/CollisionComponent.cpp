@@ -1,12 +1,8 @@
 #include "CollisionComponent.hpp"
 #include "Game.hpp"
-#include "SDL2/SDL.h"
-#include "SDL_log.h"
-#include "SDL_rect.h"
 #include "SpriteComponent.hpp"
 #include "TransformComponent.hpp"
 #include "Vec2D.hpp"
-#include "cmath"
 #include "memory"
 #include "vector"
 
@@ -43,18 +39,19 @@ void CollisionComponent::init() {
 }
 
 void CollisionComponent::update() {
-    Vec2D* movement = &this->transform_component->get_input().get_movement();
+    const Vec2D* movement =
+        &this->transform_component->get_input().get_movement();
     Vec2D* pos = &this->transform_component->get_pos();
-    float dx = movement->get_x() * this->transform_component->get_speed();
+    const float dx = movement->get_x() * this->transform_component->get_speed();
     float dy = movement->get_y() * this->transform_component->get_speed();
-    Vec2D* future = new Vec2D(pos->get_x() + dx, pos->get_y() + dy);
+    auto* future = new Vec2D(pos->get_x() + dx, pos->get_y() + dy);
     bool is_collided = false;
     this->sprite_component->get_rect().x += dx;
     this->sprite_component->get_rect().y += dy;
 
-    for (int i = 0; i < this->hitboxes.size(); i++) {
+    for (const auto& box : this->hitboxes) {
         if (SDL_HasIntersectionF(&this->sprite_component->get_rect(),
-                                 this->hitboxes[i].get())) {
+                                 box.get())) {
             is_collided = true;
         }
     }

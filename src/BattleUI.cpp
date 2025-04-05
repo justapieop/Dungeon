@@ -5,7 +5,7 @@
 #include "StatsUI.hpp"
 #include "vector"
 
-BattleUI::BattleUI(Battle& battle) {
+BattleUI::BattleUI(Battle& battle) : action(nullptr) {
     this->battle = &battle;
     this->current = 0;
     this->sel = std::vector<Selection*>();

@@ -1,7 +1,6 @@
 #include "FightingState.hpp"
 #include "Battle.hpp"
 #include "BattleUI.hpp"
-#include "Constants.hpp"
 #include "CurrentStatComponent.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
