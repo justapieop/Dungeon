@@ -1,6 +1,6 @@
 #include "FightingState.hpp"
-#include "BattleUI.hpp"
 #include "Battle.hpp"
+#include "BattleUI.hpp"
 #include "Constants.hpp"
 #include "CurrentStatComponent.hpp"
 #include "Game.hpp"
@@ -8,43 +8,37 @@
 #include "StateManager.hpp"
 #include "string"
 
-FightingState::FightingState()
-{
+FightingState::FightingState() {
     this->status_text = std::string();
     this->ui = new BattleUI(*new Battle());
 }
 
 FightingState::~FightingState() = default;
 
-void FightingState::update()
-{
+void FightingState::update() {
     this->player = std::any_cast<Entity*>(this->get_args()[0]);
     this->enemy = std::any_cast<Entity*>(this->get_args()[1]);
 
-    CurrentStatComponent *player_current = &this->player->get_component<CurrentStatComponent>();
-    CurrentStatComponent *enemy_current = &this->enemy->get_component<CurrentStatComponent>();
+    CurrentStatComponent* player_current =
+        &this->player->get_component<CurrentStatComponent>();
+    CurrentStatComponent* enemy_current =
+        &this->enemy->get_component<CurrentStatComponent>();
 
-    const Uint8 *key_states = SDL_GetKeyboardState(nullptr);
+    const Uint8* key_states = SDL_GetKeyboardState(nullptr);
 
-    if (key_states[SDL_SCANCODE_ESCAPE])
-    {
+    if (key_states[SDL_SCANCODE_ESCAPE]) {
         Game::state_manager->set_state(GameState::PAUSED);
         return;
     }
 
-    if (player_current->get_hp() == 0.0f)
-    {
+    if (player_current->get_hp() == 0.0f) {
         Game::state_manager->set_state(GameState::GAME_OVER);
         return;
     }
-    if (enemy_current->get_hp() == 0.0f)
-    {
+    if (enemy_current->get_hp() == 0.0f) {
         Game::state_manager->set_state(GameState::VICTORY);
     }
     this->ui->update();
 }
 
-void FightingState::draw()
-{
-    this->ui->draw();
-}
+void FightingState::draw() { this->ui->draw(); }

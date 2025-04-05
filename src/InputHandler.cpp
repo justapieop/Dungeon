@@ -7,18 +7,11 @@ InputHandler::InputHandler() = default;
 
 InputHandler::~InputHandler() = default;
 
-void InputHandler::draw()
-{
+void InputHandler::draw() {}
 
-}
+void InputHandler::init() { this->movement = new Vec2D(); }
 
-void InputHandler::init()
-{
-    this->movement = new Vec2D();
-}
-
-void InputHandler::update()
-{
+void InputHandler::update() {
     const Uint8* key_state = SDL_GetKeyboardState(nullptr);
 
     if (key_state[SDL_SCANCODE_W])
@@ -36,9 +29,8 @@ void InputHandler::update()
     this->movement->normalize();
 }
 
-Vec2D& InputHandler::get_movement() const
-{
-    Vec2D *t = new Vec2D(this->movement->get_x(), this->movement->get_y());
+Vec2D& InputHandler::get_movement() const {
+    Vec2D* t = new Vec2D(this->movement->get_x(), this->movement->get_y());
     this->movement->multiply(0.0f);
     return *t;
 }

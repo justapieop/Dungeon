@@ -5,9 +5,8 @@
 #include "Text.hpp"
 #include "string"
 
-class Selection
-{
-public:
+class Selection {
+  public:
     Selection(const int x, const int y, const std::string& label);
     ~Selection();
 
@@ -19,13 +18,15 @@ public:
     void set_active(bool is_active);
     Action get_action() const;
     void set_action(const Action action);
-private:
-    SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest, *label_src{};
+
+  private:
+    SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest,
+        *label_src{};
     SDL_Texture *selection, *button;
     bool is_active;
     std::string label_text;
     Action action;
 
-    Text *txt;
+    Text* txt;
 };
-#endif //SELECTION_HPP
+#endif // SELECTION_HPP
