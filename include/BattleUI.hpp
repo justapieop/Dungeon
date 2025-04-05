@@ -1,5 +1,6 @@
 #ifndef BATTLEUI_HPP
 #define BATTLEUI_HPP
+#include "Action.hpp"
 #include "ECS.hpp"
 #include "SDL2/SDL.h"
 #include "Selection.hpp"
@@ -17,6 +18,7 @@ public:
     std::vector<Selection*>& get_sel();
     int get_current() const;
     void set_current(int current);
+    void trigger_action(Entity& entity, const Action action);
 private:
     std::vector<Selection*> sel;
     StatsUI *player, *enemy;
