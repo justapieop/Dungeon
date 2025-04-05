@@ -16,10 +16,10 @@ public:
 
     void set_entities(Entity& player, Entity& enemy);
     bool get_turn() const;
-    void set_turn(const bool turn);
+    void set_turn(bool turn);
 
     BattleWinner determine() const;
-    float attack(const bool invaded);
+    float attack(bool invaded);
     float heal();
     void flee();
 private:

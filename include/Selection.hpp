@@ -7,7 +7,7 @@
 
 class Selection {
   public:
-    Selection(const int x, const int y, const std::string& label);
+    Selection(int x, int y, const std::string& label);
     ~Selection();
 
     void draw() const;
@@ -17,7 +17,7 @@ class Selection {
     bool active() const;
     void set_active(bool is_active);
     Action get_action() const;
-    void set_action(const Action action);
+    void set_action(Action action);
 
   private:
     SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest,

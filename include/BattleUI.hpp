@@ -17,7 +17,7 @@ public:
     void draw();
     std::vector<Selection*>& get_sel();
     int get_current() const;
-    void set_current(const int current);
+    void set_current(int current);
 
     Battle& get_battle();
 private:
