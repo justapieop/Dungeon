@@ -147,9 +147,6 @@ void Game::handle_events()
             SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
             is_running = false;
             break;
-        case SDL_MOUSEMOTION:
-            //SDL_Log("x = %d, y = %d", this->event.motion.x, this->event.motion.y);
-            break;
         default:
             break;
     }
