@@ -1,6 +1,7 @@
 #include "Selection.hpp"
 #include "SDL2/SDL.h"
 #include "Game.hpp"
+#include "Text.hpp"
 #include "TextureManager.hpp"
 
 Selection::Selection()
@@ -20,11 +21,8 @@ Selection::Selection(int x, int y, const std::string& label)
     this->button = TextureManager::load_texture("./assets/misc/button.png");
     this->selection = TextureManager::load_texture("./assets/misc/selection.png");
 
-    this->label_surface = TTF_RenderText_Blended(Game::font, this->label_text.c_str(), { 255, 255, 255, SDL_ALPHA_OPAQUE });
-    this->label = SDL_CreateTextureFromSurface(Game::renderer, this->label_surface);
-    SDL_FreeSurface(this->label_surface);
-    this->label_src = new SDL_Rect(0, 0, 128, 128);
-    this->label_dest = new SDL_Rect(x + this->button_dest->w + 10, y + this->button_dest->h / 2, 100, 20);
+    this->txt = new Text(x + this->button_dest->w + 10, y + this->button_dest->h / 2, 100, 20, this->label_text);
+    this->txt->create_text();
 }
 
 Selection::~Selection() = default;
@@ -33,7 +31,7 @@ void Selection::draw()
 {
     TextureManager::draw(this->button, *this->button_src, *this->button_dest);
     if (this->active()) TextureManager::draw(this->selection, *this->selection_src, *this->selection_dest);
-    TextureManager::draw(this->label, *this->label_src, *this->label_dest);
+    this->txt->draw();
 }
 
 void Selection::set_label_text(const std::string& label_text)

@@ -39,12 +39,12 @@ std::map<int, State*>& StateManager::get_states()
     return this->states;
 }
 
-int StateManager::get_state() const
+GameState StateManager::get_state() const
 {
     return this->state;
 }
 
-int StateManager::get_previous_state() const
+GameState StateManager::get_previous_state() const
 {
     return this->previous_state;
 }

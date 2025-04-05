@@ -1,7 +1,7 @@
 #ifndef PAUSEDSTATE_HPP
 #define PAUSEDSTATE_HPP
-#include "SDL2/SDL.h"
 #include "State.hpp"
+#include "Text.hpp"
 
 class PausedState : public State
 {
@@ -12,8 +12,6 @@ public:
     void update() override;
     void draw() override;
 private:
-    SDL_Surface *title_text, *exit_text;
-    SDL_Texture *title, *exit;
-    SDL_Rect *dest, *dest2;
+    Text *title_txt, *exit_txt;
 };
 #endif //PAUSEDSTATE_HPP

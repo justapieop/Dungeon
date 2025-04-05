@@ -1,6 +1,7 @@
 #ifndef SELECTION_HPP
 #define SELECTION_HPP
 #include "SDL2/SDL.h"
+#include "Text.hpp"
 #include "string"
 
 class Selection
@@ -17,10 +18,11 @@ public:
     bool active() const;
     void set_active(bool is_active);
 private:
-    SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest, *label_src, *label_dest;
-    SDL_Texture *selection, *button, *label;
-    SDL_Surface *label_surface;
+    SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest, *label_src;
+    SDL_Texture *selection, *button;
     bool is_active;
     std::string label_text;
+
+    Text *txt;
 };
 #endif //SELECTION_HPP

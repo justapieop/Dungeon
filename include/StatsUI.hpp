@@ -2,6 +2,7 @@
 #define STATSUI_HPP
 #include "ECS.hpp"
 #include "SDL2/SDL.h"
+#include "Text.hpp"
 
 class StatsUI
 {
@@ -13,9 +14,7 @@ public:
 
     void draw();
 private:
-    SDL_Rect *hp_src, *hp_dest, *atk_src, *atk_dest, *def_src, *def_dest;
-    SDL_Texture *hp_texture, *atk_texture, *def_texture;
-    SDL_Surface *hp_surface, *atk_surface, *def_surface;
+    Text *hp_txt, *atk_txt, *def_txt;
     float hp, atk, def;
 };
 #endif //STATSUI_HPP
