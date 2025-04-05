@@ -11,7 +11,7 @@ public:
     Selection(const int x, const int y, const std::string& label);
     ~Selection();
 
-    void draw();
+    void draw() const;
 
     void set_label_text(const std::string& label_text);
     std::string& get_label_text();
@@ -20,14 +20,11 @@ public:
     Action get_action() const;
     void set_action(const Action action);
 private:
-    SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest, *label_src;
+    SDL_Rect *button_src, *button_dest, *selection_src, *selection_dest, *label_src{};
     SDL_Texture *selection, *button;
     bool is_active;
     std::string label_text;
-<<<<<<< HEAD
     Action action;
-=======
->>>>>>> 30860a8d356dfb457d2db61651154de0d7947c1a
 
     Text *txt;
 };
