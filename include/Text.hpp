@@ -13,6 +13,7 @@ public:
     void set_text(const std::string& text);
     std::string& get_text();
     void create_text();
+    void clear();
 private:
     std::string text;
     SDL_Rect *txt_src, *txt_dest;

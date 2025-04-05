@@ -41,3 +41,8 @@ std::string& Text::get_text()
 {
     return this->text;
 }
+
+void Text::clear()
+{
+    if (this->txt_texture) SDL_DestroyTexture(this->txt_texture);
+}

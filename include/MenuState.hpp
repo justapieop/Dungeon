@@ -1,7 +1,7 @@
 #ifndef MENUSTATE_HPP
 #define MENUSTATE_HPP
 #include "State.hpp"
-#include "SDL2/SDL.h"
+#include "Text.hpp"
 
 class MenuState : public State
 {
@@ -12,9 +12,7 @@ public:
     void update() override;
     void draw() override;
 private:
-    SDL_Surface *title_text, *exit_text;
-    SDL_Texture *title, *exit;
-    SDL_Rect *dest, *dest2;
+    Text *title_txt, *exit_txt;
 };
 
 #endif //MENUSTATE_HPP

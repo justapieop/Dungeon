@@ -13,11 +13,7 @@ public:
 
     void update() override;
     void draw() override;
-
-    void set_my_turn(bool is_my_turn);
-    bool my_turn() const;
 private:
-    bool is_my_turn;
     Entity *player{}, *enemy{};
     std::string status_text;
     BattleUI *ui;

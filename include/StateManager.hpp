@@ -23,7 +23,7 @@ public:
     StateManager();
     ~StateManager();
     template <typename... TArgs>
-    inline void set_state(int state, TArgs&&... args)
+    inline void set_state(const GameState state, TArgs&&... args)
     {
         bool set_prev = this->previous_state == state;
         this->previous_state = this->state;
@@ -65,10 +65,10 @@ public:
     void update();
     void draw();
     std::map<int, State*>& get_states();
-    int get_state() const;
-    int get_previous_state() const;
+    GameState get_state() const;
+    GameState get_previous_state() const;
 private:
     std::map<int, State*> states;
-    int state, previous_state;
+    GameState state, previous_state;
 };
 #endif //STATEMANAGER_HPP
