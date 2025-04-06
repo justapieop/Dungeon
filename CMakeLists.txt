@@ -22,23 +22,38 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS "src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
-if (MSVC)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
-            LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
-    )
+if (WIN32)
+    if (MSVC)
+        set_target_properties(${PROJECT_NAME} PROPERTIES
+                LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
+        )
 
-    target_compile_options(${PROJECT_NAME} PRIVATE
-            /W4
-            /MP
-            /EHsc
-            /permissive-
-    )
+        target_compile_options(${PROJECT_NAME} PRIVATE
+                /W4
+                /MP
+                /EHsc
+                /permissive-
+        )
+    endif()
 
-    target_compile_definitions(${PROJECT_NAME} PRIVATE
-            _UNICODE
-            UNICODE
-    )
-endif()
+    if (MINGW)
+        set_target_properties(${PROJECT_NAME} PROPERTIES
+                LINK_FLAGS_RELEASE "-mwindows"
+        )
+
+        target_compile_options(${PROJECT_NAME} PRIVATE
+                -Wall
+                -Wextra
+                -pthread
+                -fexceptions
+        )
+    endif ()
+endif ()
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+        _UNICODE
+        UNICODE
+)
 
 target_include_directories(
         ${PROJECT_NAME} PRIVATE
