@@ -6,6 +6,8 @@
 #include "PlayingState.hpp"
 #include "State.hpp"
 #include "map"
+#include "GameOverState.hpp"
+#include "VictoryState.hpp"
 
 enum GameState
 {
@@ -23,27 +25,33 @@ public:
     StateManager();
     ~StateManager();
     template <typename... TArgs>
-    inline void set_state(int state, TArgs&&... args)
+    void set_state(const GameState state, TArgs&&... args)
     {
-        bool set_prev = this->previous_state == state;
+        const bool set_prev = this->previous_state == state;
         this->previous_state = this->state;
         this->state = state;
         State *obj = nullptr;
-        if (!this->states.count(state))
+        if (!this->states.contains(state))
         {
             switch (state)
             {
-                case GameState::PLAYING:
+                case PLAYING:
                     obj = new PlayingState();
                     break;
-                case GameState::MENU:
+                case MENU:
                     obj = new MenuState();
                     break;
-                case GameState::PAUSED:
+                case PAUSED:
                     obj = new PausedState();
                     break;
-                case GameState::FIGHTING:
+                case FIGHTING:
                     obj = new FightingState();
+                    break;
+                case GAME_OVER:
+                    obj = new GameOverState();
+                    break;
+                case VICTORY:
+                    obj = new VictoryState();
                     break;
                 default:
                     return;
@@ -65,10 +73,10 @@ public:
     void update();
     void draw();
     std::map<int, State*>& get_states();
-    int get_state() const;
-    int get_previous_state() const;
+    GameState get_state() const;
+    GameState get_previous_state() const;
 private:
     std::map<int, State*> states;
-    int state, previous_state;
+    GameState state, previous_state;
 };
 #endif //STATEMANAGER_HPP

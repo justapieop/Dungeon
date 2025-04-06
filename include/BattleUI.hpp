@@ -1,19 +1,37 @@
 #ifndef BATTLEUI_HPP
 #define BATTLEUI_HPP
-#include "ECS.hpp"
+#include "Battle.hpp"
+#include "Selection.hpp"
+#include "StatsUI.hpp"
+#include "vector"
 #include "SDL2/SDL.h"
-#include "SDL_rect.h"
 
 class BattleUI
 {
 public:
-    BattleUI();
+    explicit BattleUI(Battle& battle);
     ~BattleUI();
 
-    void update(const Entity& player, const Entity& enemy);
-    void draw();
+    void update();
+    void draw() const;
+    std::vector<Selection*>& get_sel();
+    int get_current() const;
+    void set_current(int current);
+    void trigger();
+    void enemy_act() const;
+    Battle& get_battle() const;
+    bool get_confirm() const;
+    void set_confirm(bool confirm);
+    SDL_Texture& get_texture() const;
+    void set_texture(const std::string& path);
 private:
-    SDL_Rect *attack, *attack_dest, *heal, *heal_dest;
-    SDL_Texture *button;
+    std::vector<Selection*> sel;
+    Battle *battle;
+    StatsUI *player, *enemy;
+    int current;
+    bool confirm;
+    Text *action, *turn_txt;
+    SDL_Rect *enemy_src, *enemy_dest;
+    SDL_Texture *enemy_texture;
 };
 #endif //BATTLEUI_HPP

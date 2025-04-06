@@ -1,39 +1,35 @@
 #include "MenuState.hpp"
 #include "Game.hpp"
-#include "SDL2/SDL.h"
 #include "StateManager.hpp"
+#include "Text.hpp"
 
-MenuState::MenuState() = default;
+MenuState::MenuState() {
+    this->title_txt = new Text(256, 128, 256, 16, "Press SPACEBAR to start");
+    this->exit_txt = new Text(256, 256, 256, 16, "Press ESC to quit");
+
+    this->title_txt->create_text();
+    this->exit_txt->create_text();
+}
 
 MenuState::~MenuState() = default;
 
-void MenuState::update()
-{
-    if (Game::event.type != SDL_KEYDOWN) return;
+void MenuState::update() {
+    if (Game::event.type != SDL_KEYDOWN)
+        return;
 
-    if (Game::event.key.keysym.sym == SDLK_SPACE)
-    {
-        Game::state_manager->set_state(GameState::PLAYING);
-    }
-
-    if (Game::event.key.keysym.sym == SDLK_ESCAPE)
-    {
+    switch (Game::event.key.keysym.sym) {
+    case SDLK_SPACE:
+        Game::state_manager->set_state(PLAYING);
+        break;
+    case SDLK_ESCAPE:
         Game::force_stop();
+        break;
+    default:
+        break;
     }
 }
 
-void MenuState::draw()
-{
-    this->title_text = TTF_RenderText_Blended(Game::font, "Press SPACEBAR to start", { 255, 255, 255, SDL_ALPHA_OPAQUE });
-    this->title = SDL_CreateTextureFromSurface(Game::renderer, this->title_text);
-    this->exit_text = TTF_RenderText_Blended(Game::font, "Press ESC to quit", { 255, 255, 255, SDL_ALPHA_OPAQUE });
-    this->exit = SDL_CreateTextureFromSurface(Game::renderer, this->exit_text);
-    this->dest = new SDL_Rect(256, 128, 256, 16);
-    this->dest2 = new SDL_Rect(256, 256, 244, 16);
-    SDL_RenderCopy(Game::renderer, this->title, nullptr, this->dest);
-    SDL_RenderCopy(Game::renderer, this->exit, nullptr, this->dest2);
-    SDL_FreeSurface(this->title_text);
-    SDL_FreeSurface(this->exit_text);
-    SDL_DestroyTexture(this->title);
-    SDL_DestroyTexture(this->exit);
+void MenuState::draw() {
+    this->title_txt->draw();
+    this->exit_txt->draw();
 }

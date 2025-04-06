@@ -15,7 +15,7 @@ public:
 
     Vec2D& get_movement() const;
 private:
-    Vec2D *movement;
+    Vec2D *movement{};
 };
 
 #endif //INPUTHANDLER_HPP

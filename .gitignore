@@ -138,6 +138,3 @@ CMakeUserPresets.json
 
 # External projects
 *-prefix/
-
-# Zed cache folder
-.cache/**/*
