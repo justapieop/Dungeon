@@ -40,14 +40,14 @@ void PlayingState::update() {
     if (SDL_HasIntersectionF(
             &this->player->get_component<SpriteComponent>().get_rect(),
             &this->enemy->get_component<SpriteComponent>().get_rect())) {
-        Game::state_manager->set_state(GameState::FIGHTING, player, enemy);
+        Game::state_manager->set_state(FIGHTING, player, enemy);
         return;
     }
 
     if (Game::event.type != SDL_KEYDOWN)
         return;
     if (Game::event.key.keysym.sym == SDLK_ESCAPE) {
-        Game::state_manager->set_state(GameState::PAUSED);
+        Game::state_manager->set_state(PAUSED);
     }
 }
 

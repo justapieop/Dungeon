@@ -16,12 +16,13 @@ public:
     void init() override;
     void set_texture(SDL_Texture *texture);
     SDL_FRect& get_rect();
-
+    std::string& get_path();
 private:
-    TransformComponent* transform{};
-    SDL_Texture* texture{};
+    TransformComponent *transform{};
+    SDL_Texture *texture{};
     SDL_Rect src{};
     SDL_FRect dest{};
+    std::string path;
 };
 
 #endif //SPRITECOMPONENT_HPP

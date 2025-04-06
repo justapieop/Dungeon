@@ -1,9 +1,12 @@
 #include "SpriteComponent.hpp"
 #include "TextureManager.hpp"
+#include "SDL2/SDL.h"
+#include "string"
 
 SpriteComponent::SpriteComponent() = default;
 SpriteComponent::SpriteComponent(const std::string& path) {
     this->texture = TextureManager::load_texture(path);
+    this->path = path;
 }
 
 void SpriteComponent::draw() {
@@ -27,4 +30,8 @@ void SpriteComponent::init() {
     this->dest.w = this->dest.h = 32;
 }
 
-[[nodiscard]] SDL_FRect& SpriteComponent::get_rect() { return this->dest; }
+SDL_FRect& SpriteComponent::get_rect() { return this->dest; }
+
+std::string& SpriteComponent::get_path() {
+    return this->path;
+}

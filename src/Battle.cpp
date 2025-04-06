@@ -2,6 +2,8 @@
 #include "Constants.hpp"
 #include "CurrentStatComponent.hpp"
 #include "ECS.hpp"
+#include "cmath"
+#include "Utils.hpp"
 
 Battle::Battle() { this->turn = true; }
 
@@ -18,8 +20,8 @@ float Battle::attack(const bool invaded) const {
     CurrentStatComponent* enemy_current =
         &this->enemy->get_component<CurrentStatComponent>();
 
-    float dmg = BASE_DAMAGE + (1.36 * player_current->get_atk() -
-                               1.2 * enemy_current->get_def());
+    float dmg = Utils::rng(1, 2) * std::abs(BASE_DAMAGE + (1.36 * player_current->get_atk() -
+                               1.2 * enemy_current->get_def()));
     if (!invaded) {
         if (this->turn)
             enemy_current->set_hp(enemy_current->get_hp() - dmg);
@@ -28,14 +30,15 @@ float Battle::attack(const bool invaded) const {
         return dmg;
     }
 
-    dmg = BASE_DAMAGE +
-          (1.36 * enemy_current->get_atk() - 1.22 * player_current->get_def());
+    srand(time(nullptr));
+    dmg = Utils::rng(1, 2) * std::abs(BASE_DAMAGE +
+          (1.36 * enemy_current->get_atk() - 1.22 * player_current->get_def()));
 
     player_current->set_hp(player_current->get_hp() - dmg);
     return dmg;
 }
 
-float Battle::heal() {
+float Battle::heal() const {
     if (!this->turn)
         return 0.0f;
     CurrentStatComponent* player_current =
@@ -49,15 +52,17 @@ bool Battle::get_turn() const { return this->turn; }
 void Battle::set_turn(const bool turn) { this->turn = turn; }
 
 BattleWinner Battle::determine() const {
-    CurrentStatComponent* player_current =
-        &this->player->get_component<CurrentStatComponent>();
-    CurrentStatComponent* enemy_current =
+    const CurrentStatComponent* enemy_current =
         &this->enemy->get_component<CurrentStatComponent>();
+    const CurrentStatComponent* player_current =
+        &this->player->get_component<CurrentStatComponent>();
 
-    if (enemy_current->get_hp() == 0.0f)
-        return BattleWinner::PLAYER;
-    return BattleWinner::ENEMY;
+    if (enemy_current->get_hp() <= 0.0f)
+        return PLAYER;
+    if (player_current->get_hp() <= 0.0f)
+        return ENEMY;
+    return ON_GOING;
 }
 
-Entity& Battle::get_player() { return *this->player; }
-Entity& Battle::get_enemy() { return *this->enemy; }
+Entity& Battle::get_player() const { return *this->player; }
+Entity& Battle::get_enemy() const { return *this->enemy; }

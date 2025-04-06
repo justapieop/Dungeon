@@ -1,7 +1,6 @@
 #include "FightingState.hpp"
 #include "Battle.hpp"
 #include "BattleUI.hpp"
-#include "CurrentStatComponent.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include "StateManager.hpp"
@@ -20,24 +19,21 @@ void FightingState::update() {
 
     this->ui->get_battle().set_entities(*this->player, *this->enemy);
 
-    const CurrentStatComponent* player_current =
-        &this->player->get_component<CurrentStatComponent>();
-    const CurrentStatComponent* enemy_current =
-        &this->enemy->get_component<CurrentStatComponent>();
-
     if (const Uint8* key_states = SDL_GetKeyboardState(nullptr);
         key_states[SDL_SCANCODE_ESCAPE]) {
-        Game::state_manager->set_state(GameState::PAUSED);
+        Game::state_manager->set_state(PAUSED);
         return;
     }
 
-    if (player_current->get_hp() == 0.0f) {
-        Game::state_manager->set_state(GameState::GAME_OVER);
-        return;
-    }
-
-    if (enemy_current->get_hp() == 0.0f) {
-        Game::state_manager->set_state(GameState::VICTORY);
+    switch (this->ui->get_battle().determine()) {
+        case ENEMY:
+            Game::state_manager->set_state(GAME_OVER);
+            break;
+        case PLAYER:
+            Game::state_manager->set_state(VICTORY);
+            break;
+        default:
+            break;
     }
     this->ui->update();
 }

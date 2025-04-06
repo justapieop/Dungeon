@@ -19,7 +19,7 @@ void MenuState::update() {
 
     switch (Game::event.key.keysym.sym) {
     case SDLK_SPACE:
-        Game::state_manager->set_state(GameState::PLAYING);
+        Game::state_manager->set_state(PLAYING);
         break;
     case SDLK_ESCAPE:
         Game::force_stop();

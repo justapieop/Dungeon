@@ -4,8 +4,9 @@
 
 enum BattleWinner
 {
-    PLAYER = 0,
-    ENEMY = 1,
+    ON_GOING = 0,
+    PLAYER = 1,
+    ENEMY = 2,
 };
 
 class Battle
@@ -20,11 +21,11 @@ public:
 
     BattleWinner determine() const;
     float attack(bool invaded = false) const;
-    float heal();
+    float heal() const;
     void flee();
 
-    Entity& get_player();
-    Entity& get_enemy();
+    Entity& get_player() const;
+    Entity& get_enemy() const;
 private:
     bool turn;
     Entity *player{}, *enemy{};

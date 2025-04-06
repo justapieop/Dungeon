@@ -22,7 +22,7 @@ void PausedState::update() {
             Game::state_manager->get_previous_state());
         break;
     case SDLK_ESCAPE:
-        Game::state_manager->set_state(GameState::MENU);
+        Game::state_manager->set_state(MENU);
         break;
     default:
         break;
