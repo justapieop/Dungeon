@@ -1,0 +1,89 @@
+name: Build and Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-windows-msvc:
+    name: Build Windows (MSVC)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1.13.0
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: |
+          cmake --build build --config Release
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p artifacts/windows
+          cp build/Release/*.exe artifacts/windows/
+          cp build/Release/*.dll artifacts/windows/
+          cp -r assets artifacts/windows/ || echo "No assets directory found"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dungeon-windows
+          path: artifacts/windows
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/windows/**/*
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: |
+          cmake --build build --config Release
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p artifacts/linux
+          cp build/Release/${PROJECT_NAME} artifacts/linux/ || cp build/${PROJECT_NAME} artifacts/linux/
+          cp build/Release/*.so artifacts/linux/ || echo "No .so files found"
+          cp -r assets artifacts/linux/ || echo "No assets directory found"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dungeon-linux
+          path: artifacts/linux
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/linux/**/*
