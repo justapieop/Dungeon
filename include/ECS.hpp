@@ -4,6 +4,7 @@
 #include "memory"
 #include "bitset"
 #include "vector"
+#include "array"
 
 class Component;
 class Entity;
