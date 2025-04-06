@@ -18,14 +18,15 @@ void FightingState::update() {
     this->player = std::any_cast<Entity*>(this->get_args()[0]);
     this->enemy = std::any_cast<Entity*>(this->get_args()[1]);
 
-    CurrentStatComponent* player_current =
+    this->ui->get_battle().set_entities(*this->player, *this->enemy);
+
+    const CurrentStatComponent* player_current =
         &this->player->get_component<CurrentStatComponent>();
-    CurrentStatComponent* enemy_current =
+    const CurrentStatComponent* enemy_current =
         &this->enemy->get_component<CurrentStatComponent>();
 
-    const Uint8* key_states = SDL_GetKeyboardState(nullptr);
-
-    if (key_states[SDL_SCANCODE_ESCAPE]) {
+    if (const Uint8* key_states = SDL_GetKeyboardState(nullptr);
+        key_states[SDL_SCANCODE_ESCAPE]) {
         Game::state_manager->set_state(GameState::PAUSED);
         return;
     }
@@ -34,6 +35,7 @@ void FightingState::update() {
         Game::state_manager->set_state(GameState::GAME_OVER);
         return;
     }
+
     if (enemy_current->get_hp() == 0.0f) {
         Game::state_manager->set_state(GameState::VICTORY);
     }
