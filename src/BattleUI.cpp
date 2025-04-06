@@ -22,7 +22,7 @@ BattleUI::BattleUI(Battle& battle) : action(nullptr) {
     this->sel.back()->set_action(FLEE);
 
     this->player = new StatsUI(30, 100);
-    this->enemy = new StatsUI(500, 100);
+    this->enemy = new StatsUI(600, 100);
 
     this->action = new Text(30, 300, 240, 30, "");
     this->action->create_text();
@@ -80,7 +80,7 @@ void BattleUI::update() {
 }
 
 
-void BattleUI::trigger() {
+void BattleUI::trigger() const {
     if (!this->battle->get_turn()) return;
     SDL_Log("player run");
     switch (const Selection* active = this->sel[this->get_current()];
@@ -104,7 +104,7 @@ void BattleUI::trigger() {
     this->battle->set_turn(false);
 }
 
-void BattleUI::enemy_act() {
+void BattleUI::enemy_act() const {
     if (this->battle->get_turn()) return;
     SDL_Log("enemy run");
     const float dmg = this->battle->attack(true);
@@ -112,7 +112,7 @@ void BattleUI::enemy_act() {
     this->battle->set_turn(true);
 }
 
-void BattleUI::draw() {
+void BattleUI::draw() const {
     this->player->draw();
     this->enemy->draw();
     for (const auto & i : this->sel) {
@@ -122,4 +122,4 @@ void BattleUI::draw() {
         this->action->draw();
 }
 
-Battle& BattleUI::get_battle() { return *this->battle; }
+Battle& BattleUI::get_battle() const { return *this->battle; }
