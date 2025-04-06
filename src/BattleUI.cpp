@@ -6,6 +6,7 @@
 #include "vector"
 #include "CurrentStatComponent.hpp"
 #include "Game.hpp"
+#include "Utils.hpp"
 
 BattleUI::BattleUI(Battle& battle) : action(nullptr) {
     this->battle = &battle;
@@ -87,12 +88,12 @@ void BattleUI::trigger() const {
             active->get_action()) {
             case ATTACK: {
                 const float dmg = this->battle->attack();
-                this->action->set_text("You dealt " + std::to_string(dmg) + " DMG");
+                this->action->set_text("You dealt " + Utils::round_float(-dmg) + " DMG");
                 break;
             }
             case HEAL: {
                 const float heal_hp = this->battle->heal();
-                this->action->set_text("You recovered " + std::to_string(heal_hp) + " HP");
+                this->action->set_text("You recovered " + Utils::round_float(heal_hp) + " HP");
                 break;
             }
             case FLEE: {
