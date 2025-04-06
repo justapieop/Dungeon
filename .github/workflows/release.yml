@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -19,7 +19,7 @@ jobs:
         uses: lukka/get-cmake@latest
 
       - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
+        uses: ilammy/msvc-dev-cmd@v1.13.0
 
       - name: Configure CMake
         run: |
@@ -31,78 +31,21 @@ jobs:
 
       - name: Prepare artifacts
         run: |
-          mkdir -p artifacts/windows-msvc
-          cp build/Release/*.exe artifacts/windows-msvc/
-          cp build/Release/*.dll artifacts/windows-msvc/
-          cp -r assets artifacts/windows-msvc/ || echo "No assets directory found"
+          mkdir -p artifacts/windows
+          cp build/Release/*.exe artifacts/windows/
+          cp build/Release/*.dll artifacts/windows/
+          cp -r assets artifacts/windows/ || echo "No assets directory found"
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: dungeon-windows-msvc
-          path: artifacts/windows-msvc
+          name: dungeon-windows
+          path: artifacts/windows
 
       - name: Upload to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/windows-msvc/**/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  build-windows-mingw:
-    name: Build Windows (MinGW)
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Setup MinGW
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: MINGW64
-          update: true
-          install: >-
-            mingw-w64-x86_64-gcc
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-make
-            mingw-w64-x86_64-ninja
-
-      - name: Configure CMake
-        shell: msys2 {0}
-        run: |
-          mkdir -p build
-          cd build
-          cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-
-      - name: Build
-        shell: msys2 {0}
-        run: |
-          cd build
-          cmake --build . --config Release
-
-      - name: Prepare artifacts
-        shell: msys2 {0}
-        run: |
-          mkdir -p artifacts/windows-mingw
-          cp build/*.exe artifacts/windows-mingw/
-          cp build/*.dll artifacts/windows-mingw/
-          cp -r assets artifacts/windows-mingw/ || echo "No assets directory found"
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dungeon-windows-mingw
-          path: artifacts/windows-mingw
-
-      - name: Upload to release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: artifacts/windows-mingw/**/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: artifacts/windows/**/*
 
   build-linux:
     name: Build Linux
@@ -110,7 +53,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -135,14 +78,12 @@ jobs:
           cp -r assets artifacts/linux/ || echo "No assets directory found"
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dungeon-linux
           path: artifacts/linux
 
       - name: Upload to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: artifacts/linux/**/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
