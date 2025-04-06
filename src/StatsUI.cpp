@@ -25,8 +25,8 @@ void StatsUI::set_stats(const float hp, const float atk, const float def) {
     if (this->hp < 0.0f)
         this->hp = 0.0f;
     this->hp_txt->set_text("HP: " + Utils::round_float(this->hp));
-    this->atk_txt->set_text("ATK: " + Utils::round_float(this->hp));
-    this->def_txt->set_text("DEF: " + Utils::round_float(this->hp));
+    this->atk_txt->set_text("ATK: " + Utils::round_float(this->atk));
+    this->def_txt->set_text("DEF: " + Utils::round_float(this->def));
 }
 
 void StatsUI::draw() const {
