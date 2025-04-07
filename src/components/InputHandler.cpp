@@ -1,6 +1,6 @@
-#include "InputHandler.hpp"
-#include "SDL2/SDL.h"
-#include "Vec2D.hpp"
+#include "../../include/InputHandler.hpp"
+#include "../../cmake-build-release/external/SDL/include/SDL2/SDL.h"
+#include "../../include/Vec2D.hpp"
 
 InputHandler::InputHandler() = default;
 
