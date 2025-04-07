@@ -4,11 +4,15 @@ on:
   release:
     types: [created]
 
+# Add permissions block to allow release uploads
+permissions:
+  contents: write
+
 jobs:
   build-windows-msvc:
     name: Build Windows (MSVC)
     runs-on: windows-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,7 +40,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_DEFAULT_CMP0048=NEW -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 
       - name: Build
         run: |
@@ -63,7 +67,7 @@ jobs:
   build-linux:
     name: Build Linux
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -88,7 +92,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_DEFAULT_CMP0048=NEW -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 
       - name: Build
         run: |
