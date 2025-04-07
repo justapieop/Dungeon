@@ -1,7 +1,7 @@
-#include "Text.hpp"
-#include "Game.hpp"
-#include "SDL2/SDL.h"
-#include "TextureManager.hpp"
+#include "../../include/Text.hpp"
+#include "../../cmake-build-release/external/SDL/include/SDL2/SDL.h"
+#include "../../include/Game.hpp"
+#include "../../include/TextureManager.hpp"
 #include "string"
 
 Text::Text(const int x, const int y, const int w, const int h,
