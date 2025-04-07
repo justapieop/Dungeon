@@ -1,6 +1,6 @@
-#include "Map.hpp"
-#include "TextureManager.hpp"
-#include "Utils.hpp"
+#include "../../include/Map.hpp"
+#include "../../include/TextureManager.hpp"
+#include "../../include/Utils.hpp"
 #include "filesystem"
 
 Map::Map() {

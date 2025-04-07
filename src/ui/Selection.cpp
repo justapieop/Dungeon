@@ -1,9 +1,9 @@
-#include "Selection.hpp"
-#include "Action.hpp"
-#include "Game.hpp"
-#include "SDL2/SDL.h"
-#include "Text.hpp"
-#include "TextureManager.hpp"
+#include "../../include/Selection.hpp"
+#include "../../cmake-build-release/external/SDL/include/SDL2/SDL.h"
+#include "../../include/Action.hpp"
+#include "../../include/Game.hpp"
+#include "../../include/Text.hpp"
+#include "../../include/TextureManager.hpp"
 
 Selection::Selection(const int x, const int y, const std::string& label) {
     this->is_active = false;

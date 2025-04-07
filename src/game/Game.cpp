@@ -1,9 +1,9 @@
-#include "Game.hpp"
-#include "CollisionComponent.hpp"
-#include "SDL2/SDL.h"
-#include "SDL_image.h"
-#include "StateManager.hpp"
-#include "Utils.hpp"
+#include "../../include/Game.hpp"
+#include "../../cmake-build-release/external/SDL/include/SDL2/SDL.h"
+#include "../../external/SDL_image/include/SDL_image.h"
+#include "../../include/CollisionComponent.hpp"
+#include "../../include/StateManager.hpp"
+#include "../../include/Utils.hpp"
 #include "string"
 
 Game::Game() = default;
