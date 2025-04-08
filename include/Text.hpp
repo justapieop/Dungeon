@@ -9,11 +9,11 @@ public:
     Text(const int x, const int y, const int w, const int h, const std::string& text);
     ~Text();
 
-    void draw();
+    void draw() const;
     void set_text(const std::string& text);
     std::string& get_text();
     void create_text();
-    void clear();
+    void clear() const;
 private:
     std::string text;
     SDL_Rect *txt_src, *txt_dest;
