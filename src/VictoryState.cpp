@@ -1,5 +1,5 @@
-#include "../../include/VictoryState.hpp"
-#include "../../include/Game.hpp"
+#include "VictoryState.hpp"
+#include "Game.hpp"
 
 VictoryState::VictoryState() {
     this->title = new Text(256, 128, 120, 16, "You won");
