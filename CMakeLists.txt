@@ -25,7 +25,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 if (WIN32)
     if (MSVC)
         set_target_properties(${PROJECT_NAME} PROPERTIES
-                LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS"
+                LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
         )
 
         target_compile_options(${PROJECT_NAME} PRIVATE
