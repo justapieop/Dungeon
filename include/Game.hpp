@@ -14,10 +14,10 @@ public:
     ~Game();
 
     void init(const std::string& title, int w, int h);
-    void handle_events();
+    void handle_events() const;
     void update() const;
     void render() const;
-    void clean();
+    void clean() const;
 
     static bool running();
     static StateManager* state_manager;

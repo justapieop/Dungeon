@@ -121,16 +121,16 @@ void Game::init(const std::string& title, const int w, const int h) {
     }
 }
 
-void Game::handle_events() {
+void Game::handle_events() const {
     SDL_PollEvent(&event);
 
     switch (event.type) {
-    case SDL_QUIT:
-        SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
-        is_running = false;
-        break;
-    default:
-        break;
+        case SDL_QUIT:
+            SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Game quit");
+            is_running = false;
+            break;
+        default:
+            break;
     }
 }
 
@@ -142,7 +142,7 @@ void Game::render() const {
     SDL_RenderPresent(renderer);
 }
 
-void Game::clean() {
+void Game::clean() const {
     SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Destroying window and renderer");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(this->window);
