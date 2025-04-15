@@ -44,7 +44,9 @@ BattleUI::BattleUI(Battle& battle) : action(nullptr) {
     this->confirm = true;
 }
 
-BattleUI::~BattleUI() = default;
+BattleUI::~BattleUI() {
+    SDL_DestroyTexture(this->enemy_texture);
+}
 
 int BattleUI::get_current() const { return this->current; }
 

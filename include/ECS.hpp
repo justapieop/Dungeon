@@ -46,11 +46,11 @@ public:
     Entity() = default;
     ~Entity() = default;
 
-    void update()
+    void update() const
     {
         for (const auto& c : this->components) c->update();
     }
-    void draw()
+    void draw() const
     {
         for (const auto& c : this->components) c->draw();
     }
@@ -104,11 +104,11 @@ private:
 class ComponentManager
 {
 public:
-    void update()
+    void update() const
     {
         for (const auto& e : entities) e->update();
     }
-    void draw()
+    void draw() const
     {
         for (const auto& e : entities) e->draw();
     }

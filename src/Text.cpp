@@ -5,7 +5,8 @@
 #include "string"
 
 Text::Text(const int x, const int y, const int w, const int h,
-           const std::string& text) {
+           const std::string& text)
+    : txt_surface(nullptr), txt_texture(nullptr) {
     this->text = text;
     this->txt_src = new SDL_Rect(0, 0, w, h);
     this->txt_dest = new SDL_Rect(x, y, w, h);
@@ -23,7 +24,7 @@ void Text::create_text() {
     SDL_FreeSurface(this->txt_surface);
 }
 
-void Text::draw() {
+void Text::draw() const {
     TextureManager::draw(this->txt_texture, *this->txt_src, *this->txt_dest);
 }
 
@@ -38,7 +39,7 @@ void Text::set_text(const std::string& text) {
 
 std::string& Text::get_text() { return this->text; }
 
-void Text::clear() {
+void Text::clear() const {
     if (this->txt_texture)
         SDL_DestroyTexture(this->txt_texture);
 }
